@@ -253,8 +253,8 @@ expect(computeClips([], 4000)).toEqual([]);
 - Consumes: `scrollProgress`, `progressToTimecode`, `computeClips` (Task 3); IDs de seção (Task 4)
 - Produces: `Timeline` com props `{ clips: { id: string; label: string; track: 'V1' | 'V2'; color: string }[] }`. Cada `id` é o `id` de um elemento da página. V1: `abertura` (lilás), `processo` (verde), `contrate` (rosa), `trabalhou-com` (amarelo). V2: `video-1` … `video-N` (azul, rótulo `1`…`N`). A trilha A1 tem um único clipe decorativo, que ocupa toda a largura.
 
-- [ ] **Step 1: Implementar `useScrollProgress()`**, que devolve `{ progress, clips }`. Ele mede `getBoundingClientRect().top + scrollY` e `offsetHeight` de cada `id` ao montar, no `resize` e via `ResizeObserver` em `document.body`. O progresso é atualizado num `scroll` passivo, com `requestAnimationFrame`.
-- [ ] **Step 2: Implementar `Timeline.tsx`**:
+- [x] **Step 1: Implementar `useScrollProgress()`**, que devolve `{ progress, clips }`. Ele mede `getBoundingClientRect().top + scrollY` e `offsetHeight` de cada `id` ao montar, no `resize` e via `ResizeObserver` em `document.body`. O progresso é atualizado num `scroll` passivo, com `requestAnimationFrame`.
+- [x] **Step 2: Implementar `Timeline.tsx`**:
   - barra `position: fixed` no rodapé, com altura `var(--timeline-h)`, z-index acima do conteúdo e abaixo do botão do WhatsApp;
   - régua e rótulos V2/V1/A1 visíveis só a partir de `md`;
   - clipes posicionados por `left`/`width` em %, cada um um `<button>` com `aria-label="Ir para <label>"`, que chama `document.getElementById(id).scrollIntoView({ behavior })`, onde `behavior` é `'auto'` se `matchMedia('(prefers-reduced-motion: reduce)')` e `'smooth'` nos outros casos;
@@ -262,12 +262,12 @@ expect(computeClips([], 4000)).toEqual([]);
   - timecode `progressToTimecode(progress)` em azul, fonte mono, com `aria-hidden`.
 
   Visual de referência: `.superpowers/brainstorm/24503-1793339355/content/timeline-a-fluxo.html`.
-- [ ] **Step 3: Verificar** com `astro dev --background`:
+- [x] **Step 3: Verificar** com `astro dev --background`:
   - em 1440 px, rolar do topo ao fim: a agulha vai de cerca de 0% a 100% e fica sobre o clipe da seção visível, e o timecode vai de `00:00:0x` até `00:01:00:00`;
   - clicar em "Contrate" leva à seção;
   - Tab percorre os clipes;
   - em 375 px, a faixa fina mostra só clipes e agulha, sem cobrir texto, sem rolagem horizontal e com a pílula acima da faixa.
-- [ ] **Step 4: Commit** `feat: add fixed Premiere-style scroll timeline`
+- [x] **Step 4: Commit** `feat: add fixed Premiere-style scroll timeline`
 
 ---
 
