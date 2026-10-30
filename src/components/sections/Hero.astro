@@ -1,0 +1,24 @@
+---
+import { Image } from 'astro:assets';
+import vinicius from '@/assets/vinicius.png';
+import { site } from '@/data/site';
+---
+
+<section id="abertura" class="mx-auto flex min-h-screen w-full max-w-6xl scroll-mt-4 flex-col items-center justify-center gap-10 px-4 py-16 md:flex-row md:gap-16 md:px-8">
+  <Image
+    src={vinicius}
+    alt="Vinicius Melo"
+    width={640}
+    widths={[320, 480, 640]}
+    sizes="(min-width: 768px) 384px, 70vw"
+    loading="eager"
+    class="aspect-[1121/1403] h-auto w-[70vw] max-w-sm rounded-lg border border-border object-cover md:w-96"
+  />
+  <div class="max-w-xl">
+    <h1 class="text-4xl font-semibold tracking-tight md:text-5xl">{site.name}</h1>
+    <p class="mt-2 text-lg text-primary">{site.role}</p>
+    <div class="mt-6 space-y-4 text-base leading-relaxed text-foreground/90">
+      {site.heroText.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+  </div>
+</section>

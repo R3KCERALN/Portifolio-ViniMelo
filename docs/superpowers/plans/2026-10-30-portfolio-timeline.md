@@ -217,27 +217,27 @@ expect(computeClips([], 4000)).toEqual([]);
   - IDs de seção usados pelas tarefas seguintes: `abertura`, `portfolio`, `processo`, `contrate`, `trabalhou-com`.
   - Variável CSS `--timeline-h`, com `120px` a partir de `md` e `56px` abaixo. O `body` recebe `padding-bottom: var(--timeline-h)`.
 
-- [ ] **Step 1: Copiar a foto** de `~/Downloads/Retrato Masculino em Estúdio Aconchegante.png` para `src/assets/vinicius.png`.
-- [ ] **Step 2: Ajustar os tokens** de `.dark` em `global.css`:
+- [x] **Step 1: Copiar a foto** de `~/Downloads/Retrato Masculino em Estúdio Aconchegante.png` para `src/assets/vinicius.png`.
+- [x] **Step 2: Ajustar os tokens** de `.dark` em `global.css`:
   - `--background` em `#000` (o "monitor");
   - `--card` em `#1d1d1d`;
   - `--border` em `#262626`;
   - `--primary` em `#4da3ff`.
 
   Os demais tokens seguem a mesma família de cinzas. Fonte do timecode: `ui-monospace, Menlo, monospace`.
-- [ ] **Step 3: Montar `BaseLayout`** com o título "Vinicius Melo — Editor de vídeo e filmmaker". A meta description sai do primeiro parágrafo de `heroText`, e a `og:image` é a foto, gerada com `getImage` em 1200 px.
-- [ ] **Step 4: Montar `Hero.astro`** (`id="abertura"`, altura mínima de uma tela). Leva a foto via `<Image>` do Astro com largura de até 640 px, `loading="eager"` e alt "Vinicius Melo", mais nome, função e os dois parágrafos de `heroText`.
-- [ ] **Step 5: Montar `WhatsAppButton.astro`**:
+- [x] **Step 3: Montar `BaseLayout`** com o título "Vinicius Melo — Editor de vídeo e filmmaker". A meta description sai do primeiro parágrafo de `heroText`, e a `og:image` é a foto, gerada com `getImage` em 1200 px.
+- [x] **Step 4: Montar `Hero.astro`** (`id="abertura"`, altura mínima de uma tela). Leva a foto via `<Image>` do Astro com largura de até 640 px, `loading="eager"` e alt "Vinicius Melo", mais nome, função e os dois parágrafos de `heroText`.
+- [x] **Step 5: Montar `WhatsAppButton.astro`**:
   - âncora para `whatsappUrl()`, com `target="_blank"` e `rel="noopener"`;
   - fixa à direita, em `bottom: calc(var(--timeline-h) + 12px)`;
   - pílula conforme as Global Constraints, ícone SVG do balão do WhatsApp só em traço;
   - texto "Conversar" e `aria-label="Conversar com o Vinicius no WhatsApp"`.
-- [ ] **Step 6: Montar `Footer.astro`** com `site.credit` (link para o Instagram), discreto, em texto cinza.
-- [ ] **Step 7: Verificar.**
+- [x] **Step 6: Montar `Footer.astro`** com `site.credit` (link para o Instagram), discreto, em texto cinza.
+- [x] **Step 7: Verificar.**
   - `npm run build`: esperado `1 page(s) built` sem erros.
   - `npm test`: esperado PASS.
   - `astro dev --background`: abrir em 1440 px e 375 px. Esperado: fundo preto, foto e texto legíveis, pílula cinza "Conversar" no canto e sem rolagem horizontal.
-- [ ] **Step 8: Commit** `feat: add base layout, hero, WhatsApp button and footer`
+- [x] **Step 8: Commit** `feat: add base layout, hero, WhatsApp button and footer`
 
 ---
 
