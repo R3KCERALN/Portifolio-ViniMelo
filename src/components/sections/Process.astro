@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import ProcessSteps from '@/components/process/ProcessSteps.tsx';
+import timeline from '@/assets/processo-timeline.jpg';
+import { site } from '@/data/site';
+
+const [intro, stepsLead] = site.processIntro.split('\n\n');
+---
+
+<section id="processo" class="mx-auto w-full max-w-5xl scroll-mt-4 px-4 py-20 md:px-8">
+  <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Processo criativo</h2>
+  <div class="mt-8 max-w-2xl space-y-4 leading-relaxed text-foreground/90">
+    <p>{intro}</p>
+    <p>{stepsLead}</p>
+  </div>
+  <div class="mt-6 max-w-2xl">
+    <ProcessSteps client:visible steps={[...site.processSteps]} />
+  </div>
+  <p class="mt-6 max-w-2xl leading-relaxed text-foreground/90">{site.processReferences}</p>
+
+  <div class="mt-12 grid gap-8 sm:grid-cols-2">
+    <video
+      controls
+      playsinline
+      preload="metadata"
+      src="/media/processo-timelapse.mp4"
+      aria-label="Timelapse do Vinicius editando um vídeo"
+      class="mx-auto aspect-[478/850] w-full max-w-xs rounded-lg border border-border bg-card"
+    ></video>
+    <Image
+      src={timeline}
+      alt="Timeline de edição de um vídeo do Vinicius"
+      width={640}
+      widths={[320, 480, 640]}
+      sizes="(min-width: 640px) 320px, 90vw"
+      class="mx-auto h-auto w-full max-w-xs rounded-lg border border-border"
+    />
+  </div>
+</section>

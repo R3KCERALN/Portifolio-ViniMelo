@@ -309,16 +309,16 @@ expect(computeClips([], 4000)).toEqual([]);
 **Interfaces:**
 - Consumes: `site.processIntro`, `site.processSteps`, `site.processReferences` (Task 1)
 
-- [ ] **Step 1: Copiar os arquivos.** O vídeo vem de `~/Downloads/WhatsApp Video 2026-10-30 at 02.07.18.mp4` e a foto de `~/Downloads/WhatsApp Image 2026-10-30 at 02.07.19.jpeg`.
-- [ ] **Step 2: Implementar `ProcessSteps.tsx`.** As 5 etapas viram 5 trilhas horizontais rotuladas, uma por etapa, em cores de clipe diferentes. Cada clipe "acende" (opacidade e largura) ao entrar na tela, com `motion` `whileInView` e `viewport={{ once: true, amount: 0.6 }}`, dentro de `<MotionConfig reducedMotion="user">`. A lista também existe como `<ol>` acessível, sem depender da animação.
-- [ ] **Step 3: Montar `Process.astro`** (`id="processo"`):
+- [x] **Step 1: Copiar os arquivos.** O vídeo vem de `~/Downloads/WhatsApp Video 2026-10-30 at 02.07.18.mp4` e a foto de `~/Downloads/WhatsApp Image 2026-10-30 at 02.07.19.jpeg`.
+- [x] **Step 2: Implementar `ProcessSteps.tsx`.** As 5 etapas viram 5 trilhas horizontais rotuladas, uma por etapa, em cores de clipe diferentes. Cada clipe "acende" (opacidade e largura) ao entrar na tela, com `motion` `whileInView` e `viewport={{ once: true, amount: 0.6 }}`, dentro de `<MotionConfig reducedMotion="user">`. A lista também existe como `<ol>` acessível, sem depender da animação.
+- [x] **Step 3: Montar `Process.astro`** (`id="processo"`):
   - texto de introdução;
   - `<ProcessSteps client:visible />`;
   - linha de referências;
   - timelapse em `<video controls playsinline preload="metadata" src="/media/processo-timelapse.mp4">`, vertical, sem autoplay;
   - foto da timeline via `<Image>`, com alt "Timeline de edição de um vídeo do Vinicius".
-- [ ] **Step 4: Verificar** com `npm run build` e no navegador: as etapas acendem ao rolar, aparecem estáticas com reduced motion (DevTools → Rendering → emulate) e o vídeo só toca com clique.
-- [ ] **Step 5: Commit** `feat: add creative process section`
+- [x] **Step 4: Verificar** com `npm run build` e no navegador: as etapas acendem ao rolar, aparecem estáticas com reduced motion (DevTools → Rendering → emulate) e o vídeo só toca com clique.
+- [x] **Step 5: Commit** `feat: add creative process section`
 
 ---
 
