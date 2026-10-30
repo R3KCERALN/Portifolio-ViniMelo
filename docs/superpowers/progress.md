@@ -40,3 +40,8 @@ Protocolo: `docs/superpowers/orchestration.md`
   - Ruling: mensagens dos pacotes usam "no Pacote X" (sem "em"), como o plano manda; as demais usam "em um vídeo …".
   - Armadilha achada: em componentes React dentro de `.astro`, `class` é ignorado, precisa `className` (o contorno do VIP sumia). Vale para as Tasks 9 e 10.
   - Criei `src/components/ChatLink.astro` (pílula "Conversar") para os 7 botões dos cards.
+- [x] Task 9 — Trabalhou com (logos) — commit 8f771b0 — aguardando revisão
+  - `npm test`: 40/40 (4 novos). Build: as 14 logos saem só em webp, a maior com 31 KB (< 40 KB); nenhum PNG/JPEG de logo vai para o `dist`. 1440 px e 375 px sem rolagem horizontal; Fazz em círculo, Yêda Carvalho e Pró-Cardíaco clareadas e legíveis.
+  - Ruling: aparei a margem transparente de 7 logos (Eletromóveis, GG Eletrônicos, Nokia, Pró-Cardíaco, Sapatilhas.com, SEA Telecom, Skyfit) nas cópias de `src/assets/logos`, porque ocupavam só 19–70% da tela e saíam minúsculas (Pró-Cardíaco quase invisível). Os originais seguem em ~/Downloads. É a "otimização para web" da spec, sem mudar cor nem forma. Custo se errado: restaurar do Downloads.
+  - Ruling: espaço de cada logo com `max-h-14` e `max-w-44` (o plano só fala em ~56 px de altura) para logos largas não ficarem miúdas.
+  - `brightness(1.8)` aprovado no olho para Yêda Carvalho e Pró-Cardíaco.
