@@ -1,14 +1,19 @@
 ---
 import { Image } from 'astro:assets';
 import { clients, people } from '@/data/clients';
+
+// Células vazias no fim da última linha, para a grade não ter buraco: quantas faltam muda com o número de colunas.
+const missing = (cols: number) => (cols - (clients.length % cols)) % cols;
+const [miss2, miss3, miss5] = [missing(2), missing(3), missing(5)];
+const fillers = [1, 2, 3, 4];
 ---
 
-<section id="trabalhou-com" class="mx-auto w-full max-w-5xl scroll-mt-4 px-4 py-20 md:px-8">
-  <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Trabalhou com</h2>
-  <ul class="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+<section id="trabalhou-com" class="mx-auto w-full max-w-[80rem] scroll-mt-4 px-4 py-16 md:px-8 lg:py-24">
+  <h2 class="display section-mark" style="--mark: #e6c26e">Trabalhou com</h2>
+  <ul role="list" class="mt-10 grid grid-cols-2 gap-px bg-[#111] sm:grid-cols-3 lg:grid-cols-5">
     {
       clients.map((client) => (
-        <li class="flex h-16 items-center justify-center px-2">
+        <li class="flex h-22 items-center justify-center bg-[#232323] px-3 sm:h-28">
           <Image
             src={client.logo}
             alt={client.name}
@@ -16,7 +21,7 @@ import { clients, people } from '@/data/clients';
             format="webp"
             loading="lazy"
             class:list={[
-              'max-h-14 w-auto max-w-44 object-contain',
+              'max-h-14 w-auto max-w-[min(11rem,100%)] object-contain',
               client.treatment === 'circle' && 'aspect-square h-14 w-14 rounded-full object-cover',
               client.treatment === 'brighten' && 'brightness-[1.8]',
             ]}
@@ -24,10 +29,23 @@ import { clients, people } from '@/data/clients';
         </li>
       ))
     }
+    {
+      fillers.map((n) => (
+        <li
+          aria-hidden="true"
+          class:list={[
+            'h-22 bg-[#232323] sm:h-28',
+            n <= miss2 ? 'block' : 'hidden',
+            n <= miss3 ? 'sm:block' : 'sm:hidden',
+            n <= miss5 ? 'lg:block' : 'lg:hidden',
+          ]}
+        />
+      ))
+    }
   </ul>
   {
     people.length > 0 && (
-      <ul class="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-foreground/90">
+      <ul class="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-foreground">
         {people.map((person) => (
           <li>
             <a href={person.url} target="_blank" rel="noopener" class="underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
