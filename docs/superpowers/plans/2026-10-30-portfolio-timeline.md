@@ -56,11 +56,11 @@
 git add -A && git commit -m "chore: scaffold Astro project with design spec and plan"
 ```
 
-- [ ] **Step 1: Instalar o Vitest e criar a configuração**
+- [x] **Step 1: Instalar o Vitest e criar a configuração**
 
 `npm install -D vitest@5.0.5`. Em `vitest.config.ts`, use `getViteConfig` de `astro/config`, com `test: { include: ['src/**/*.test.ts'] }`.
 
-- [ ] **Step 2: Escrever os testes que falham**
+- [x] **Step 2: Escrever os testes que falham**
 
 ```ts
 // src/lib/whatsapp.test.ts
@@ -73,10 +73,10 @@ expect(formatBRL(128)).toBe('R$ 128');
 expect(formatBRL(32.5)).toBe('R$ 32,50');
 ```
 
-- [ ] **Step 3: Rodar e ver falhar.** `npm test`. Esperado: FAIL, módulos inexistentes.
-- [ ] **Step 4: Implementar** `whatsappUrl` com `encodeURIComponent`, lendo `site.whatsappNumber`, e `formatBRL` com `Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0, maximumFractionDigits: 2 })`. Criar `src/data/site.ts` com os textos literais da spec.
-- [ ] **Step 5: Rodar e ver passar.** `npm test`. Esperado: PASS.
-- [ ] **Step 6: Commit** `feat: add site content data and WhatsApp link helper`
+- [x] **Step 3: Rodar e ver falhar.** `npm test`. Esperado: FAIL, módulos inexistentes.
+- [x] **Step 4: Implementar** `whatsappUrl` com `encodeURIComponent`, lendo `site.whatsappNumber`, e `formatBRL` com `Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0, maximumFractionDigits: 2 })`. Criar `src/data/site.ts` com os textos literais da spec.
+- [x] **Step 5: Rodar e ver passar.** `npm test`. Esperado: PASS.
+- [x] **Step 6: Commit** `feat: add site content data and WhatsApp link helper`
 
 ---
 
