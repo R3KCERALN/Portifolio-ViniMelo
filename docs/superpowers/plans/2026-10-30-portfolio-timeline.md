@@ -361,7 +361,7 @@ Mensagens no formato `Oi, Vinicius! Tenho interesse em <alvo>.`, com os alvos:
 
 Os alvos dos pacotes começam com "no" ("Tenho interesse no Pacote VIP"), e o card personalizado usa a forma completa.
 
-- [ ] **Step 1: Escrever os testes que falham**
+- [x] **Step 1: Escrever os testes que falham**
 
 ```ts
 const premium = packs.find(p => p.id === 'premium')!; const vip = packs.find(p => p.id === 'vip')!;
@@ -371,10 +371,10 @@ expect(tiers.find(t => t.id === 'complexo')!.price).toBeNull();
 expect(packs.filter(p => p.highlighted).map(p => p.id)).toEqual(['vip']);
 ```
 
-- [ ] **Step 2: Rodar e ver falhar.** `npm test -- src/data/pricing.test.ts`
-- [ ] **Step 3: Implementar `pricing.ts`.**
-- [ ] **Step 4: Rodar e ver passar.** `npm test`
-- [ ] **Step 5: Montar `Hire.astro`** (`id="contrate"`) com:
+- [x] **Step 2: Rodar e ver falhar.** `npm test -- src/data/pricing.test.ts`
+- [x] **Step 3: Implementar `pricing.ts`.**
+- [x] **Step 4: Rodar e ver passar.** `npm test`
+- [x] **Step 5: Montar `Hire.astro`** (`id="contrate"`) com:
   - título "Contrate o Vinicius" e o texto `hireIntro`;
   - parágrafo explicando que o preço do avulso depende de duração, plataforma e quantidade de efeitos;
   - cards dos avulsos;
@@ -383,8 +383,8 @@ expect(packs.filter(p => p.highlighted).map(p => p.id)).toEqual(['vip']);
   - logo abaixo dos cards, sempre visível, a linha `invoiceNote` com um ícone de documento só em traço (`FileText` do lucide-react).
 
   Cada card tem um botão "Conversar" que leva a `whatsappUrl(card.whatsappMessage)`, com o mesmo estilo de pílula do botão fixo.
-- [ ] **Step 6: Verificar.** `npm run build`, e `dist/index.html` contém "Emito nota fiscal de serviço, caso você precise.". No navegador em 375 px, os cards empilham sem rolagem horizontal e os botões abrem o WhatsApp com a mensagem certa.
-- [ ] **Step 7: Commit** `feat: add pricing and packages section`
+- [x] **Step 6: Verificar.** `npm run build`, e `dist/index.html` contém "Emito nota fiscal de serviço, caso você precise.". No navegador em 375 px, os cards empilham sem rolagem horizontal e os botões abrem o WhatsApp com a mensagem certa.
+- [x] **Step 7: Commit** `feat: add pricing and packages section`
 
 ---
 
