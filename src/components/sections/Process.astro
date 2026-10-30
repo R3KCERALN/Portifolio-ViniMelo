@@ -7,33 +7,39 @@ import { site } from '@/data/site';
 const [intro, stepsLead] = site.processIntro.split('\n\n');
 ---
 
-<section id="processo" class="mx-auto w-full max-w-5xl scroll-mt-4 px-4 py-20 md:px-8">
-  <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Processo criativo</h2>
-  <div class="mt-8 max-w-2xl space-y-4 leading-relaxed text-foreground/90">
-    <p>{intro}</p>
-    <p>{stepsLead}</p>
+<section id="processo" class="mx-auto w-full max-w-[80rem] scroll-mt-4 px-4 py-16 md:px-8 lg:grid lg:grid-cols-12 lg:gap-x-12 lg:py-24">
+  <div class="lg:col-span-7">
+    <h2 class="display section-mark" style="--mark: #7cc48a">Processo criativo</h2>
+    <div class="prose-block mt-8 space-y-4 text-foreground">
+      <p>{intro}</p>
+      <p>{stepsLead}</p>
+    </div>
+    <div class="mt-6 max-w-2xl">
+      <ProcessSteps client:visible steps={[...site.processSteps]} />
+    </div>
+    <p class="prose-block mt-6 text-foreground">{site.processReferences}</p>
   </div>
-  <div class="mt-6 max-w-2xl">
-    <ProcessSteps client:visible steps={[...site.processSteps]} />
-  </div>
-  <p class="mt-6 max-w-2xl leading-relaxed text-foreground/90">{site.processReferences}</p>
 
-  <div class="mt-12 grid gap-8 sm:grid-cols-2">
+  {/* Desktop: o timelapse na frente e o print da timeline atrás, deslocado para baixo e para a direita. Abaixo disso, um depois do outro. */}
+  <div class="mt-12 flex flex-col gap-8 sm:flex-row lg:relative lg:col-span-5 lg:mt-2 lg:block lg:pr-0 lg:pb-[13%]">
+    {/* width/height evitam a regra sem camada do tema do Vidstack (16/9, largura 100%), que ganha das classes do Tailwind. */}
     <video
+      width="478"
+      height="850"
       controls
       playsinline
       preload="metadata"
       src="/media/processo-timelapse.mp4"
       aria-label="Timelapse do Vinicius editando um vídeo"
-      class="mx-auto aspect-[478/850] w-full max-w-xs rounded-lg border border-border bg-card"
+      class="h-auto aspect-[478/850] w-full max-w-xs rounded-[2px] bg-[var(--monitor)] sm:w-1/2 lg:relative lg:z-10 lg:w-[88%] lg:max-w-none"
     ></video>
     <Image
       src={timeline}
       alt="Timeline de edição de um vídeo do Vinicius"
       width={640}
       widths={[320, 480, 640]}
-      sizes="(min-width: 640px) 320px, 90vw"
-      class="mx-auto h-auto w-full max-w-xs rounded-lg border border-border"
+      sizes="(min-width: 1024px) 28rem, (min-width: 640px) 45vw, 90vw"
+      class="h-auto w-full max-w-xs rounded-[2px] sm:w-1/2 lg:absolute lg:top-[12%] lg:left-[12%] lg:z-0 lg:w-[88%] lg:max-w-none"
     />
   </div>
 </section>

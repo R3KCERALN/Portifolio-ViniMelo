@@ -13,7 +13,7 @@ const CLIPS = [
   { color: '#e6c26e', left: 58, width: 40 },
 ];
 
-const clipClass = 'relative flex h-full min-h-9 items-center overflow-hidden rounded-[3px] px-3 py-1 text-sm leading-tight text-[#111]';
+const clipClass = 'relative flex h-full min-h-9 items-center overflow-hidden rounded-[2px] px-3 py-1 text-sm leading-tight text-[#111]';
 
 // A largura final nunca passa do que sobra na trilha depois da margem.
 const final = (clip: { left: number; width: number }) => ({ opacity: 1, width: `${Math.min(clip.width + 20, 100 - clip.left)}%` });
@@ -23,12 +23,12 @@ export default function ProcessSteps({ steps }: Props) {
 
   return (
     <>
-      <ol className="divide-y divide-[#111] overflow-hidden rounded-md border border-border bg-card">
+      <ol className="divide-y divide-[#111] overflow-hidden rounded-[2px] bg-[#232323]">
         {steps.map((step, i) => {
           const clip = CLIPS[i % CLIPS.length];
           return (
             <li key={step} className="flex items-stretch">
-              <span className="flex w-16 shrink-0 items-center justify-center border-r border-[#111] bg-[#262626] font-mono text-xs text-[#8a8a8a]">
+              <span className="flex w-16 shrink-0 items-center justify-center border-r border-[#111] bg-[#262626] text-xs text-[#9a9a9a]">
                 V{i + 1}
               </span>
               <div className="relative min-h-12 flex-1 bg-[#232323] py-1.5">
