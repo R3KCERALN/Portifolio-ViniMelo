@@ -26,7 +26,7 @@ O site fica na Vercel. Um agendamento do GitHub Actions reconstrói o site todo 
 3. **Deploy Hook.** Na Vercel, em Settings, Git, Deploy Hooks, crie um hook na branch `main` e copie a URL.
 4. **Secret no GitHub.** No repositório, em Settings, Secrets and variables, Actions, crie o secret `VERCEL_DEPLOY_HOOK_URL` com a URL do hook.
 5. **Teste.** Em Actions, rode "Daily rebuild" uma vez à mão e confirme que a Vercel iniciou um deploy.
-6. **Vídeos do Vinicius.** Peça para ele exportar os vídeos com menos de 100 MB. Esses tocam no player do site. Os maiores abrem o player do Drive, que é mais lento.
+6. **Vídeos do Vinicius.** Basta subir na pasta do Drive, sem limite de tamanho. Os vídeos tocam no player do Drive (o Google não deixa outro site tocar o arquivo direto), com a capa e o botão do site até o clique.
 
 Se o Drive falhar na hora do build, o build quebra e a Vercel mantém no ar a última versão boa.
 

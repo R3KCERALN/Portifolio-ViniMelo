@@ -200,12 +200,6 @@ h2.display {
 }
 
 
-/* O tema do Vidstack zera o contorno da raiz do player e quase não mostra foco; sem isso quem navega por Tab não vê onde está. */
-[data-media-player][data-view-type]:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: -2px;
-}
-
 /* A única animação de entrada da página: o nome aparece num wipe e a foto entra num corte seco logo depois. */
 @media (prefers-reduced-motion: no-preference) {
   .hero-title {

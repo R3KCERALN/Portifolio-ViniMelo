@@ -1,7 +1,5 @@
 import { driveFixture } from './drive.fixture';
 
-export const DIRECT_PLAY_MAX_BYTES = 100 * 1024 * 1024;
-
 const DEFAULT_LIMIT = 10;
 const VIDEO_EXTENSION = /\.(mp4|mov|m4v|webm|mkv|avi)$/i;
 
@@ -15,13 +13,12 @@ export interface DriveFile {
   videoMediaMetadata?: { width?: number; height?: number; durationMillis?: string };
 }
 
-export type Playback = { kind: 'direct'; src: string } | { kind: 'iframe'; src: string };
-
 export interface PortfolioVideo {
   id: string;
   title: string;
   createdTime: string;
-  playback: Playback;
+  /** Player do Drive. O Drive recusa (403) o arquivo embutido por outro site, então não há reprodução direta. */
+  embedUrl: string;
   posterUrl: string | null;
   aspectRatio: number;
 }
@@ -34,21 +31,13 @@ export function isVideoFile(file: DriveFile): boolean {
   return file.mimeType.startsWith('video/') || file.videoMediaMetadata !== undefined;
 }
 
-function playbackFor(file: DriveFile): Playback {
-  const bytes = Number(file.size);
-  const canPlayDirect = file.size !== undefined && Number.isFinite(bytes) && bytes > 0 && bytes <= DIRECT_PLAY_MAX_BYTES;
-  return canPlayDirect
-    ? { kind: 'direct', src: `https://drive.usercontent.google.com/download?id=${file.id}&export=download` }
-    : { kind: 'iframe', src: `https://drive.google.com/file/d/${file.id}/preview` };
-}
-
 export function toPortfolioVideo(file: DriveFile): PortfolioVideo {
   const { width, height } = file.videoMediaMetadata ?? {};
   return {
     id: file.id,
     title: titleFromFileName(file.name),
     createdTime: file.createdTime,
-    playback: playbackFor(file),
+    embedUrl: `https://drive.google.com/file/d/${file.id}/preview`,
     // Sem thumbnailLink, usa a miniatura pública do Drive (arquivo da pasta pública), que não exige chave.
     posterUrl: file.thumbnailLink
       ? file.thumbnailLink.replace(/=s\d+$/, '=s1280')

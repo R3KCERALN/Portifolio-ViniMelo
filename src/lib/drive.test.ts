@@ -1,6 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
 import {
-  DIRECT_PLAY_MAX_BYTES,
   fetchLatestVideos,
   isVideoFile,
   loadPortfolio,
@@ -68,21 +67,11 @@ describe('isVideoFile', () => {
 });
 
 describe('toPortfolioVideo', () => {
-  it('plays directly up to the size limit', () => {
-    expect(toPortfolioVideo({ ...base, id: 'A', size: String(99 * MB) }).playback).toEqual({
-      kind: 'direct',
-      src: 'https://drive.usercontent.google.com/download?id=A&export=download',
-    });
-    expect(toPortfolioVideo({ ...base, id: 'A', size: String(DIRECT_PLAY_MAX_BYTES) }).playback.kind).toBe('direct');
-  });
-
-  it('falls back to the Drive iframe above the limit or without a size', () => {
-    expect(toPortfolioVideo({ ...base, id: 'B', size: String(101 * MB) }).playback).toEqual({
-      kind: 'iframe',
-      src: 'https://drive.google.com/file/d/B/preview',
-    });
-    expect(toPortfolioVideo({ ...base, id: 'C', size: undefined }).playback.kind).toBe('iframe');
-    expect(toPortfolioVideo({ ...base, id: 'D', size: 'abc' }).playback.kind).toBe('iframe');
+  // O Drive recusa (403) vídeo embutido por outro site; só o player dele toca fora do drive.google.com.
+  it('always plays in the Drive player, whatever the size', () => {
+    for (const size of [String(8 * MB), String(101 * MB), undefined, 'abc']) {
+      expect(toPortfolioVideo({ ...base, id: 'A', size }).embedUrl).toBe('https://drive.google.com/file/d/A/preview');
+    }
   });
 
   it('builds the poster from the thumbnail link', () => {
@@ -188,8 +177,5 @@ describe('driveFixture', () => {
     expect(driveFixture).toHaveLength(11);
     const times = driveFixture.map((f) => Date.parse(f.createdTime));
     expect(times).toEqual([...times].sort((a, b) => b - a));
-    const big = driveFixture.find((f) => f.id === '114nyOK0aEC8-hUNSxxZNLxwUyIP8VUm_');
-    expect(Number(big?.size)).toBeGreaterThan(DIRECT_PLAY_MAX_BYTES);
-    expect(driveFixture.filter((f) => Number(f.size) > DIRECT_PLAY_MAX_BYTES)).toHaveLength(1);
   });
 });
