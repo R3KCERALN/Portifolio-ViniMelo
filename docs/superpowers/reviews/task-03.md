@@ -6,6 +6,8 @@ Commit revisado: `2baa8c25f4910c5b8c23d0b3b3c94231b6d71930`.
 Escopo: matemática de progresso, timecode e geometria dos clipes.
 Modelo atual mantido conforme autorização do usuário nesta sessão.
 
+Rastreabilidade: a sessão implementadora incorporou este parecer e a mudança de status da Task 3 no commit `2a0043b` durante o trabalho concorrente. O histórico foi preservado; o commit `docs: review task 3` registra esta nota e o vínculo do parecer no andamento, sem mudanças de código.
+
 ## Achados
 
 1. **Sugestão — atualizar o contrato documental da âncora de rolagem.** Referência: `docs/superpowers/plans/2026-10-30-portfolio-timeline.md:175` no commit revisado, comparada a `src/lib/timeline.ts:14`. O comentário da interface ainda define a âncora como o centro fixo da viewport. Essa fórmula retornaria `0,95` em `(7200, 800, 8000)`, contrariando o resultado `1` exigido pelo próprio plano. A implementação resolve a contradição deslocando a âncora do centro até a base da viewport. Por exemplo, `(3600, 800, 8000)` retorna `0,525`, em vez de `0,5` da fórmula documentada. A spec deixa a conversão da rolagem a critério da implementação, e o ajuste respeita os exemplos exigidos. Correção sugerida: documentar no plano a âncora móvel e seus limites para evitar que uma manutenção restaure a fórmula antiga. Não requer bloquear o código.
