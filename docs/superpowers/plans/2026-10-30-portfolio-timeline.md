@@ -283,19 +283,19 @@ expect(computeClips([], 4000)).toEqual([]);
 - Consumes: `loadPortfolio`, `PortfolioVideo` (Task 2); `site.driveFolderUrl` (Task 1); props de `Timeline` (Task 5)
 - Produces: elementos `id="video-1"` … `id="video-N"` dentro de `<section id="portfolio">`.
 
-- [ ] **Step 1: Buscar os vídeos no frontmatter de `index.astro`:** `const videos = await loadPortfolio({ apiKey: import.meta.env.GOOGLE_DRIVE_API_KEY, isDev: import.meta.env.DEV, folderId: site.driveFolderId })`. Se der erro, o build quebra, e é isso que queremos (spec: "nunca publicar o portfólio vazio").
-- [ ] **Step 2: Gerar os pôsteres.** Para cada vídeo com `posterUrl`, `getImage({ src: posterUrl, inferSize: true, width: 960, format: 'webp' })`. O resultado vai para o `dist` no build. Se `getImage` falhar para um pôster, use `null` e siga em frente. Um pôster faltando não derruba o build.
-- [ ] **Step 3: Implementar `VideoPlayer.tsx`**, com props `{ video: PortfolioVideo; poster: string | null }`:
+- [x] **Step 1: Buscar os vídeos no frontmatter de `index.astro`:** `const videos = await loadPortfolio({ apiKey: import.meta.env.GOOGLE_DRIVE_API_KEY, isDev: import.meta.env.DEV, folderId: site.driveFolderId })`. Se der erro, o build quebra, e é isso que queremos (spec: "nunca publicar o portfólio vazio").
+- [x] **Step 2: Gerar os pôsteres.** Para cada vídeo com `posterUrl`, `getImage({ src: posterUrl, inferSize: true, width: 960, format: 'webp' })`. O resultado vai para o `dist` no build. Se `getImage` falhar para um pôster, use `null` e siga em frente. Um pôster faltando não derruba o build.
+- [x] **Step 3: Implementar `VideoPlayer.tsx`**, com props `{ video: PortfolioVideo; poster: string | null }`:
   - `direct`: Vidstack `<MediaPlayer src={{ src, type: 'video/mp4' }} load="play" posterLoad="visible" playsInline title={video.title} aspectRatio={...}>` com `<MediaProvider />`, `<Poster />` e `<DefaultVideoLayout icons={defaultLayoutIcons} />`. Importe `@vidstack/react/player/styles/default/theme.css` e `layouts/video.css`, e troque a cor de destaque do tema por `#4da3ff`.
   - `iframe`: mostra o pôster com um botão de play e só cria o `<iframe src={playback.src} allow="autoplay; fullscreen" allowfullscreen loading="lazy">` depois do clique.
-- [ ] **Step 4: Montar `Portfolio.astro`.** Cada vídeo fica num bloco `id="video-<n>"` com o player (`client:visible`) e o título, e os vídeos verticais (`aspectRatio < 1`) ficam com largura contida. No fim vem o link "Ver mais trabalhos", com `href={site.driveFolderUrl}` e `target="_blank"`.
-- [ ] **Step 5: Passar os clipes V2 para `Timeline`.** São `videos.length` clipes, com rótulo = posição.
-- [ ] **Step 6: Verificar.**
+- [x] **Step 4: Montar `Portfolio.astro`.** Cada vídeo fica num bloco `id="video-<n>"` com o player (`client:visible`) e o título, e os vídeos verticais (`aspectRatio < 1`) ficam com largura contida. No fim vem o link "Ver mais trabalhos", com `href={site.driveFolderUrl}` e `target="_blank"`.
+- [x] **Step 5: Passar os clipes V2 para `Timeline`.** São `videos.length` clipes, com rótulo = posição.
+- [x] **Step 6: Verificar.**
   - Sem chave, no `astro dev`, aparecem os 10 vídeos da fixture. O vídeo da SEA Telecom acima de 100 MB usa o iframe, e os outros tocam no player do site ao clicar.
   - A aba Network não mostra download de MP4 antes do play.
   - Com a chave no `.env`, `npm run build` passa e `dist/index.html` contém 10 blocos `id="video-`.
   - Sem chave, `npm run build` falha com mensagem citando `GOOGLE_DRIVE_API_KEY`.
-- [ ] **Step 7: Commit** `feat: add rotating Drive portfolio section`
+- [x] **Step 7: Commit** `feat: add rotating Drive portfolio section`
 
 ---
 

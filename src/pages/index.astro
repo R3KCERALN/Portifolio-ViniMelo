@@ -2,22 +2,46 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/sections/Hero.astro';
 import Footer from '@/components/sections/Footer.astro';
+import Portfolio from '@/components/sections/Portfolio.astro';
 import Timeline from '@/components/timeline/Timeline.tsx';
+import { getImage } from 'astro:assets';
+import { loadPortfolio } from '@/lib/drive';
 import { site } from '@/data/site';
+
+// Se a busca falhar ou vier vazia, o build quebra de propósito: nunca publicar o portfólio vazio.
+const videos = await loadPortfolio({
+  apiKey: import.meta.env.GOOGLE_DRIVE_API_KEY,
+  isDev: import.meta.env.DEV,
+  folderId: site.driveFolderId,
+});
+
+// Pôster que não baixa não derruba o build: o vídeo só fica sem capa.
+const posters = await Promise.all(
+  videos.map(async (video) => {
+    if (!video.posterUrl) return null;
+    try {
+      return (await getImage({ src: video.posterUrl, inferSize: true, width: 960, format: 'webp' })).src;
+    } catch {
+      return null;
+    }
+  }),
+);
 
 // Cores dos clipes: ver Global Constraints do plano. Ids sem elemento na página são ignorados.
 const clips = [
   { id: 'abertura', label: 'Abertura', track: 'V1', color: '#a98bd6' },
+  ...videos.map((_, i) => ({ id: `video-${i + 1}`, label: String(i + 1), track: 'V2', color: '#6fa8dc' })),
   { id: 'processo', label: 'Processo', track: 'V1', color: '#7cc48a' },
   { id: 'contrate', label: 'Contrate', track: 'V1', color: '#e8a0bf' },
   { id: 'trabalhou-com', label: 'Trabalhou com', track: 'V1', color: '#e6c26e' },
-] as const;
+];
 ---
 
 <BaseLayout title={`${site.name} — ${site.role}`} description={site.heroText[0]}>
   <main>
     <Hero />
+    <Portfolio videos={videos} posters={posters} />
   </main>
   <Footer />
-  <Timeline slot="timeline" client:load clips={[...clips]} />
+  <Timeline slot="timeline" client:load clips={clips} />
 </BaseLayout>

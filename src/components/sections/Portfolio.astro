@@ -1,0 +1,39 @@
+---
+import VideoPlayer from '@/components/portfolio/VideoPlayer.tsx';
+import type { PortfolioVideo } from '@/lib/drive';
+import { site } from '@/data/site';
+
+interface Props {
+  videos: PortfolioVideo[];
+  posters: (string | null)[];
+}
+
+const { videos, posters } = Astro.props;
+---
+
+<section id="portfolio" class="mx-auto w-full max-w-5xl scroll-mt-4 px-4 py-20 md:px-8">
+  <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Portfólio</h2>
+  <div class="mt-12 space-y-20">
+    {
+      videos.map((video, i) => (
+        <article id={`video-${i + 1}`} class="mx-auto flex scroll-mt-4 flex-col gap-4" style={`max-width: ${video.aspectRatio < 1 ? '22rem' : '56rem'}`}>
+          {/* O Vidstack não renderiza no servidor (usa `window`), então o player só existe no navegador. O bloco reserva o espaço para a página não saltar. */}
+          <div class="rounded-lg bg-card" style={`aspect-ratio: ${video.aspectRatio}`}>
+            <VideoPlayer client:only="react" video={video} poster={posters[i]} />
+          </div>
+          <h3 class="text-sm leading-snug font-medium text-muted-foreground md:text-base">{video.title}</h3>
+        </article>
+      ))
+    }
+  </div>
+  <p class="mt-16 text-center">
+    <a
+      href={site.driveFolderUrl}
+      target="_blank"
+      rel="noopener"
+      class="inline-flex min-h-11 items-center rounded-md border border-border px-5 text-sm text-foreground transition-colors hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+    >
+      Ver mais trabalhos
+    </a>
+  </p>
+</section>
