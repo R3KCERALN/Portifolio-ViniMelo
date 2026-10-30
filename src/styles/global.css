@@ -182,6 +182,17 @@ h2.display {
   }
 }
 
+/* Espaço que a pílula "Conversar" (fixa à direita) ocupa fora da coluna da página; as linhas com botão deixam essa folga para não ficarem sob ela. */
+:root {
+  --pill-gutter: 0px;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --pill-gutter: max(0px, calc(130px - max(0px, (100vw - 80rem) / 2)));
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
