@@ -12,3 +12,8 @@ Protocolo: `docs/superpowers/orchestration.md`
   - Verificado em 1440 px e 375 px (Chrome headless via CDP): sem rolagem horizontal, foto e texto legíveis, botão 44 px. A extensão do Chrome não conectou, por isso a captura foi pelo CDP.
   - Ruling: `og:image` sai como caminho relativo enquanto `site` não estiver em `astro.config.mjs`; vira URL absoluta quando o domínio da Vercel for definido (Task 10 deve lembrar disso). Custo se errado: prévia de link sem imagem.
   - Risco para a revisão/Task 5: a 375 px o botão "Conversar" é fixo e passa por cima do texto durante a rolagem; conferir com a timeline pronta.
+- [x] Task 2 — Vídeos do Google Drive — commit c8c2d79 — aguardando revisão
+  - Fixture montada com a listagem real da pasta pública (11 arquivos; IDs e nomes reais). `size` e `createdTime` são aproximados, como o plano manda; sem `thumbnailLink` nem `videoMediaMetadata` (não há como saber), então no dev o pôster é nulo e a proporção é 9:16.
+  - Ruling: erros de rede e HTTP nunca incluem a URL nem a chave (a chave vai na query string); falha de rede vira "Drive API inacessível". Custo se errado: mensagem de erro menos detalhada.
+  - Ruling: `fetchLatestVideos` monta a query com `encodeURIComponent` (e não `URLSearchParams`) para o espaço sair como `%20`, como o teste do plano exige.
+  - Pendente do usuário (não bloqueia o código): a chave `GOOGLE_DRIVE_API_KEY` real, para testar `fetchLatestVideos` contra a API de verdade. Os testes usam `fetch` falso.
