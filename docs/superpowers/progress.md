@@ -33,3 +33,10 @@ Protocolo: `docs/superpowers/orchestration.md`
   - Ruling: em vez de `<MotionConfig reducedMotion="user">`, usei `useReducedMotion()` e, com reduced motion, o `motion.div` vai direto ao estado final sem transição. Motivo: o HTML do servidor já sai no estado "apagado" e o `MotionConfig` ainda animava a opacidade. Custo se errado: nenhum visível.
   - Ruling: a largura final do clipe é limitada ao que sobra na trilha (`min(width+20, 100-left)`) e o texto quebra linha, porque a etapa 5 passava de 100% e o texto das etapas 4 e 5 era cortado a 375 px.
   - A foto da timeline (`processo-timeline.jpg`) é um print vertical 717×1280 (50 KB); o timelapse tem 11 MB, como a spec.
+- [x] Task 8 — Preços e pacotes — commit 04baae5 — aguardando revisão
+  - `npm test`: 36/36 (5 novos de preço). Build: `dist/index.html` tem a nota fiscal literal e as 7 mensagens de WhatsApp certas. 1440 px e 375 px sem rolagem horizontal; VIP com contorno azul e badge "Mais vantajoso".
+  - Ruling: `Tier` ganhou o campo opcional `priceNote`, usado só no Complexo ("Negociado conforme a ideia do vídeo", que está na tabela da spec). Custo se errado: remover um campo.
+  - Ruling: o texto de "Vídeo avulso" copia o parágrafo da spec ("O preço depende da duração…") em vez de reescrever; títulos "Vídeo avulso" e "Pacotes" são rótulos curtos novos.
+  - Ruling: mensagens dos pacotes usam "no Pacote X" (sem "em"), como o plano manda; as demais usam "em um vídeo …".
+  - Armadilha achada: em componentes React dentro de `.astro`, `class` é ignorado, precisa `className` (o contorno do VIP sumia). Vale para as Tasks 9 e 10.
+  - Criei `src/components/ChatLink.astro` (pílula "Conversar") para os 7 botões dos cards.
