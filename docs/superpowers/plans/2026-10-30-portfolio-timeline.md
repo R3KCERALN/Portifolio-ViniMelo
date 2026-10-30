@@ -470,3 +470,64 @@ expect(packs.filter(p => p.highlighted).map(p => p.id)).toEqual(['vip']);
 - [x] **Step 5: Commit** `chore: add daily rebuild workflow and deploy guide`
 
 **Risco conhecido:** o GitHub desativa workflows agendados em repositórios **públicos** sem atividade por 60 dias. O repositório hoje é privado. Se virar público, alguém precisa reativar o workflow, ou ele pode ser trocado por um Vercel Cron.
+
+---
+
+### Task 11: Redesign visual (ilha de edição)
+
+*Modelo: Sonnet 5.5, esforço alto. Pedida pelo Allan em 2026-10-30, depois das Tasks 1–10: "ainda está simples o site". Direção aprovada na sessão orquestradora. Muda só a aparência: dados, textos, ids das seções, lógica do Drive, do player e da timeline ficam como estão.*
+
+**Referência obrigatória:** leia `~/.claude/skills/frontend-design/SKILL.md` (pedido pelo Allan com `/frontend-design`) e use `ui-ux-pro-max` antes de montar cada seção. Os textos aprovados continuam literais. Os rótulos novos passam pelo `no-ai-slop`.
+
+**Files:**
+- Modify: `package.json` (adicionar `@fontsource-variable/archivo`, remover `@fontsource-variable/geist`). Esta tarefa autoriza essa troca, que é exceção à regra de dependências das Global Constraints.
+- Modify: `src/styles/global.css`, `src/layouts/BaseLayout.astro`
+- Modify: `src/components/sections/{Hero,Portfolio,Process,Hire,Clients,Footer}.astro`, `src/components/process/ProcessSteps.tsx`, `src/components/portfolio/VideoPlayer.tsx` (só a moldura)
+- Não mexa em: `src/lib/*`, `src/data/*` (exceto se um rótulo novo precisar de campo), `Timeline.tsx` (exceto fonte e cores dos tokens), testes existentes.
+
+**Tokens** (substituem o tema escuro atual em `global.css`):
+
+| Token | Valor | Uso |
+|---|---|---|
+| painel | `#1d1d1d` | fundo da página (sai o `#000` atual) |
+| trilha | `#232323` / `#262626` | superfícies, linhas de tabela, células de logo |
+| divisória | `#111` | fios entre trilhas, linhas e células |
+| monitor | `#000` | só dentro de players, timelapse e moldura da foto |
+| texto | `#e6e6e6`; secundário `#9a9a9a` | contraste ≥ 4.5:1 sobre `#1d1d1d` e `#262626` |
+| agulha | `#4da3ff` | único destaque: links, foco, agulha, contorno do VIP |
+| cor da seção | a cor do clipe V1/V2 da seção (Global Constraints) | um marcador quadrado de 10 px antes de cada `h2` e a cor do número dos vídeos. Nunca em parágrafo nem em fundo grande |
+
+Decisão da orquestradora: manter o azul `#4da3ff` e os cinzas já usados na timeline, em vez de `#2d8ceb`/`#2a2a2a`, para a página e a timeline serem da mesma família.
+
+**Tipografia:** Archivo variável com eixo de largura (`@fontsource-variable/archivo/wdth.css`; eixos `wdth` 62–125, `wght` 100–900).
+- Títulos (`h1`, `h2`, números dos vídeos, preços): `font-stretch: 62%–75%`, peso 800–900, entrelinha 0.9–1.0, letras um pouco juntas. Nada de caixa alta forçada por CSS (escreva com a caixa do texto).
+- Texto corrido: largura 100%, peso 400, 16–18 px, entrelinha 1.6, no máximo `65ch`.
+- Timecode e preços: `font-variant-numeric: tabular-nums`. Tirar o `ui-monospace` do timecode da timeline.
+- Escala: `h1` `clamp(4.5rem, 14vw, 12rem)`, `h2` `clamp(2.5rem, 6vw, 4.5rem)`, `h3` 1.25rem.
+
+**Layout por seção** (alinhamento à esquerda em tudo; largura máxima da página 80rem com margem lateral de 16 px no celular):
+
+1. **Abertura (o elemento memorável; o resto da página fica quieto).** Desktop: grade de 12 colunas. A foto ocupa as colunas 7–12, numa moldura `#000`, com duas linhas finas de área segura (retângulos internos a 5% e 10%, `1px` branco a 15% de opacidade, `aria-hidden`). O `h1` "Vinicius / Melo" (quebra entre nome e sobrenome) começa na coluna 1 e passa por cima da borda esquerda da foto (`position: relative; z-index`). Abaixo vêm a função, em `#9a9a9a`, e os dois parágrafos. Celular: o título vem antes da foto, com a foto em largura total logo abaixo e o título sobrepondo a borda superior dela em ~1/3 da altura da linha. A seção mantém `min-h-screen` só no desktop.
+   - **Animação única da página:** ao carregar, o `h1` aparece com um wipe da esquerda para a direita (`clip-path: inset(0 100% 0 0)` → `inset(0 0 0 0)`, 500 ms, `cubic-bezier(.2,.7,.2,1)`). Em seguida a foto entra num corte seco (opacidade 0→1 em 1 frame, 120 ms depois). Só CSS, dentro de `@media (prefers-reduced-motion: no-preference)`. Sem fade-and-slide em outras seções.
+2. **Portfólio.** Desktop (≥1024 px): duas colunas. A esquerda (4/12) é `sticky top-8` e tem o `h2` e o link "Ver mais trabalhos". A direita (8/12) traz a lista de vídeos. Cada vídeo é uma linha: o número (1–10) grande, condensado, na cor azul do clipe V2; ao lado, o player (`#000`, sem `rounded-lg`, raio de 2 px como clipe) e, abaixo, o nome do arquivo em `#9a9a9a`. Vídeos verticais com no máximo 22rem de largura, horizontais com a largura toda da coluna. Celular: uma coluna, número acima do player, link "Ver mais trabalhos" no fim. Os ids `video-N` continuam no `article`.
+3. **Processo.** Desktop: duas colunas. Esquerda: `h2`, os dois parágrafos, `ProcessSteps` e as referências. Direita: o timelapse numa moldura `#000` e o print da timeline atrás dele, deslocado ~10% para baixo e para a direita, parcialmente coberto. O vídeo fica sempre inteiro visível e clicável. `ProcessSteps` usa os mesmos tokens da timeline fixa (rótulos `#262626`, trilhas `#232323`, fios `#111`, fonte Archivo, sem mono). Celular: empilhado (texto, etapas, vídeo, print).
+4. **Contrate.** Sai o kit de cards shadcn (`Card`, `Badge` deixam de ser usados nesta seção).
+   - "Vídeo avulso": uma tabela de preços em linhas (`<ul>` ou `<table>` semântica). Desktop: nome (condensado) | descrição | preço à direita, em `tabular-nums` | "Conversar". Fios `#111` entre as linhas e fundo `#232323`. Celular: cada linha empilha nome+preço na primeira linha, depois a descrição e o botão. "Sob consulta" e a `priceNote` do Complexo continuam.
+   - "Pacotes": dois blocos lado a lado (empilhados no celular), com fundo `#262626` e raio de 2 px. O preço vai grande e condensado; por vídeo, desconto, preço cheio riscado e validade vêm em linhas separadas, sem juntar com `·`. O VIP tem contorno de 2 px `#4da3ff` e o selo "Mais vantajoso" como texto pequeno no canto (sem pílula).
+   - "Contrato personalizado": uma linha da mesma família visual da tabela, com o texto aprovado e "Conversar".
+   - Nota fiscal: logo abaixo, com ícone, sempre visível (sem mudança de texto).
+5. **Trabalhou com.** Grade de células coladas, com `gap: 1px` sobre fundo `#111` e cada célula `#232323`, altura de 112 px (desktop) / 88 px (celular), logo centralizada com os limites e tratamentos atuais (círculo da Fazz, `brighten` da Yêda e do Pró-Cardíaco: reconfira no fundo `#232323`). 5 colunas no desktop, 3 no tablet e 2 no celular. As células vazias da última linha ficam no mesmo cinza, sem buraco.
+6. **Rodapé:** crédito à esquerda, `#9a9a9a`, com o mesmo alinhamento da página. Sem mudança de texto.
+
+**Pílula "Conversar" e `ChatLink`:** sem mudança de cor (Global Constraints). Só a fonte passa a ser Archivo.
+
+**Evite** (lista do frontend-design): rótulo em caixa alta acima de cada título, `·` juntando metadados, `→` em links, sombra cinza igual em tudo, um raio só para tudo, palavra destacada em cor dentro do título, gradiente.
+
+- [ ] **Step 1: Fonte e tokens.** Instale `@fontsource-variable/archivo`, remova a Geist e reescreva os tokens do `.dark` em `global.css` conforme a tabela. `npm test` e `npm run build` (sem chave falha de propósito; use o dev para olhar).
+- [ ] **Step 2: Abertura** (layout + animação única). Confira em 1440 px e 375 px.
+- [ ] **Step 3: Portfólio** (coluna fixa + lista numerada). Confira se os clipes V2 da timeline continuam alinhados aos vídeos e se nenhum MP4 é baixado antes do play.
+- [ ] **Step 4: Processo.**
+- [ ] **Step 5: Contrate** (tabela + pacotes). Confira as 7 mensagens de WhatsApp no HTML gerado (devem ser as mesmas de antes).
+- [ ] **Step 6: Trabalhou com e rodapé.**
+- [ ] **Step 7: Verificação final** em 1440 px, 1024 px e 375 px (capturas para o progress.md): sem rolagem horizontal; pílula e timeline sem cobrir preços, botões ou controles do player; foco visível em todos os elementos com Tab; contraste ≥ 4.5:1 no texto; com `prefers-reduced-motion: reduce`, nenhuma animação de entrada; a agulha e os clipes ainda batem com as seções; `npm test` passando.
+- [ ] **Step 8: Commits** por etapa (`feat: redesign hero`, `feat: redesign portfolio section`…) ou um só `feat: editing-suite visual redesign`. Depois, a linha em `progress.md`.

@@ -52,4 +52,5 @@ Protocolo: `docs/superpowers/orchestration.md`
   - Defeito achado e corrigido na revisão: a raiz do player Vidstack recebia foco por Tab sem indicador (o tema zera o contorno). Regra em `global.css` com o contorno azul.
   - `npm test`: 40/40. `npm run build` **sem chave falha de propósito** (mensagem cita `GOOGLE_DRIVE_API_KEY`); o build completo com a chave real não foi rodado (a chave é do usuário).
   - Risco conhecido do plano: o GitHub desativa workflows agendados em repositório público sem atividade por 60 dias (registrado no README).
-  - **Tasks 1 a 10 concluídas. A revisão final da branch inteira pode começar (Opus 5.5, alto).**
+  - Tasks 1 a 10 concluídas.
+- [ ] Task 11 — Redesign visual (ilha de edição) — pedida pelo Allan em 2026-10-30, direção aprovada na orquestradora — Sonnet 5.5, alto. A revisão final (Opus) fica para depois desta.

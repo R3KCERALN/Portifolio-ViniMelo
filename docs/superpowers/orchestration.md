@@ -29,8 +29,9 @@ A ordem agrupa tarefas de mesmo modelo/esforço para trocar o mínimo possível.
 | 8 | Task 8 — preços e pacotes | Sonnet 5.5, médio | tela que usa dados prontos, sem transação |
 | 9 | Task 9 — logos | Sonnet 5.5, médio | tela e imagens |
 | 10 | Task 10 — publicação diária e revisão final | Sonnet 5.5, médio | workflow e guia |
+| 11 | Task 11 — redesign visual (ilha de edição) | Sonnet 5.5, alto | refaz o visual de todas as seções, com responsivo e animação |
 
-Revisora: **Sonnet 5.5, médio** para cada tarefa. Revisão final da branch inteira (uma vez, depois da Task 10): **Opus 5.5, alto**.
+Revisora: **Sonnet 5.5, médio** para cada tarefa. Revisão final da branch inteira (uma vez, depois da Task 11): **Opus 5.5, alto**.
 
 ## Regra de modelo e esforço (as duas sessões)
 
@@ -59,7 +60,7 @@ Para cada tarefa, na ordem da tabela:
    `- [x] Task N — <título> — commit <hash curto> — aguardando revisão`
 5. Siga para a próxima tarefa sem pedir confirmação.
 
-Pare e pergunte ao usuário somente para: trocar modelo/esforço; algo que contradiz a spec; uma credencial que só ele tem (chave do Google, Vercel). Ao terminar a Task 10, avise que a revisão final pode começar.
+Pare e pergunte ao usuário somente para: trocar modelo/esforço; algo que contradiz a spec; uma credencial que só ele tem (chave do Google, Vercel). Ao terminar a Task 11, avise que a revisão final pode começar.
 
 Nunca faça `git push` nem crie contas ou chaves por conta própria.
 
@@ -73,6 +74,8 @@ Nunca faça `git push` nem crie contas ou chaves por conta própria.
    - os achados numerados, cada um com o arquivo:linha, o problema, a correção sugerida e a gravidade (`bloqueante` ou `sugestão`).
 5. Atualize a linha da tarefa em `progress.md` para `revisada: <veredito>` e faça um commit apenas com esses dois arquivos (`docs: review task N`).
 6. Se não houver tarefa aguardando, diga isso e pare.
-7. Depois da Task 10, peça para trocar para Opus 5.5, esforço alto, e faça a revisão final da branch inteira em `reviews/final.md`.
+7. Depois da Task 11, peça para trocar para Opus 5.5, esforço alto, e faça a revisão final da branch inteira em `reviews/final.md`.
+
+**Redesign (Task 11):** nas revisões pendentes das Tasks 4, 6, 7, 8 e 9, confira lógica, testes, acessibilidade e textos, mas não registre achados de aparência (cor, fonte, layout), porque a Task 11 refaz o visual. A conferência visual com `ui-ux-pro-max` em 1440/375 px fica para a revisão da Task 11.
 
 A revisora não edita código. Se um achado for de escopo (spec ambígua), ela registra como `pergunta para o usuário`.
