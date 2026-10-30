@@ -1,0 +1,19 @@
+name: Daily rebuild
+
+# Reconstrói o site na Vercel todo dia às 03:00 (Brasília), para o portfólio
+# pegar os vídeos novos da pasta do Drive.
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chamar o Deploy Hook da Vercel
+        env:
+          VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: curl -fsS -X POST "$VERCEL_DEPLOY_HOOK_URL"

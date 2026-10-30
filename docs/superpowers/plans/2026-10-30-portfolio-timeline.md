@@ -448,25 +448,25 @@ expect(packs.filter(p => p.highlighted).map(p => p.id)).toEqual(['vip']);
 - Create: `.github/workflows/daily-rebuild.yml`
 - Modify: `README.md` (seção "Publicação" com o passo a passo)
 
-- [ ] **Step 1: Criar o workflow** com:
+- [x] **Step 1: Criar o workflow** com:
   - `on: schedule: - cron: '0 6 * * *'` (03:00 em Brasília) e `workflow_dispatch`;
   - um job com o passo `curl -fsS -X POST "$VERCEL_DEPLOY_HOOK_URL"`, onde `VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}`;
   - `permissions: {}`.
-- [ ] **Step 2: Escrever no README** o passo a passo, em português:
+- [x] **Step 2: Escrever no README** o passo a passo, em português:
   1. criar a chave no Google Cloud (ativar a Drive API, criar a chave de API e restringi-la à Drive API);
   2. importar o repositório na Vercel (preset Astro detectado automaticamente) e cadastrar `GOOGLE_DRIVE_API_KEY` em Production e Preview;
   3. criar o Deploy Hook na Vercel, na branch `main`;
   4. salvar a URL do hook como secret `VERCEL_DEPLOY_HOOK_URL` no GitHub;
   5. rodar o workflow manualmente uma vez para testar;
   6. orientar o Vinicius a exportar os vídeos com menos de 100 MB.
-- [ ] **Step 3: Revisão final no navegador**, com `npm run build && npm run preview`:
+- [x] **Step 3: Revisão final no navegador**, com `npm run build && npm run preview`:
   - em 1440 px e 375 px, percorrer a página inteira;
   - nenhuma rolagem horizontal; pílula e timeline sem cobrir conteúdo;
   - Tab passa por clipes, players e botões com foco visível;
   - reduced motion desliga a rolagem suave e as animações;
   - nenhum som toca sozinho;
   - o crédito do rodapé abre o Instagram.
-- [ ] **Step 4: Testes e build.** `npm test` e `npm run build`. Esperado: PASS e build completo.
-- [ ] **Step 5: Commit** `chore: add daily rebuild workflow and deploy guide`
+- [x] **Step 4: Testes e build.** `npm test` e `npm run build`. Esperado: PASS e build completo.
+- [x] **Step 5: Commit** `chore: add daily rebuild workflow and deploy guide`
 
 **Risco conhecido:** o GitHub desativa workflows agendados em repositórios **públicos** sem atividade por 60 dias. O repositório hoje é privado. Se virar público, alguém precisa reativar o workflow, ou ele pode ser trocado por um Vercel Cron.
