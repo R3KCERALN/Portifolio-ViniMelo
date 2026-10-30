@@ -89,7 +89,7 @@ describe('toPortfolioVideo', () => {
     expect(toPortfolioVideo({ ...base, thumbnailLink: 'https://lh3.googleusercontent.com/x=s220' }).posterUrl).toBe(
       'https://lh3.googleusercontent.com/x=s1280',
     );
-    expect(toPortfolioVideo({ ...base }).posterUrl).toBeNull();
+    expect(toPortfolioVideo({ ...base, id: 'A' }).posterUrl).toBe('https://lh3.googleusercontent.com/d/A=w1280');
   });
 
   it('derives the aspect ratio from the metadata, defaulting to 9:16', () => {

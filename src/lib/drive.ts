@@ -49,7 +49,10 @@ export function toPortfolioVideo(file: DriveFile): PortfolioVideo {
     title: titleFromFileName(file.name),
     createdTime: file.createdTime,
     playback: playbackFor(file),
-    posterUrl: file.thumbnailLink ? file.thumbnailLink.replace(/=s\d+$/, '=s1280') : null,
+    // Sem thumbnailLink, usa a miniatura pública do Drive (arquivo da pasta pública), que não exige chave.
+    posterUrl: file.thumbnailLink
+      ? file.thumbnailLink.replace(/=s\d+$/, '=s1280')
+      : `https://lh3.googleusercontent.com/d/${file.id}=w1280`,
     aspectRatio: width && height ? width / height : 9 / 16,
   };
 }
