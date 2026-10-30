@@ -118,7 +118,7 @@ Regras:
 - `drive.fixture.ts` exporta `driveFixture: DriveFile[]` com os 11 arquivos atuais. Os IDs e nomes estão na listagem da pasta. O `size` em bytes é aproximado (35, 36, 31, 58, 37, 67, 75, 8, 150, 27 e 26 MB, nessa ordem de ID), e o ID `114nyOK0aEC8-hUNSxxZNLxwUyIP8VUm_` fica acima de 100 MB. O `createdTime` deve ser decrescente na ordem da listagem.
 - `.env.example` contém `GOOGLE_DRIVE_API_KEY=`.
 
-- [ ] **Step 1: Escrever os testes que falham** em `src/lib/drive.test.ts`
+- [x] **Step 1: Escrever os testes que falham** em `src/lib/drive.test.ts`
 
 ```ts
 // titleFromFileName
@@ -152,10 +152,10 @@ expect(toPortfolioVideo({ ...base }).aspectRatio).toBeCloseTo(9 / 16);
 // { isDev: true, apiKey: 'k' } → chama fetchImpl
 ```
 
-- [ ] **Step 2: Rodar e ver falhar.** `npm test -- src/lib/drive.test.ts`. Esperado: FAIL.
-- [ ] **Step 3: Implementar `src/lib/drive.ts` e `src/lib/drive.fixture.ts`** conforme as regras acima. Em `titleFromFileName`, remova só a extensão final que estiver em `/\.(mp4|mov|m4v|webm|mkv|avi)$/i` e depois apare os espaços.
-- [ ] **Step 4: Rodar e ver passar.** `npm test`. Esperado: PASS.
-- [ ] **Step 5: Commit** `feat: load latest portfolio videos from Google Drive`
+- [x] **Step 2: Rodar e ver falhar.** `npm test -- src/lib/drive.test.ts`. Esperado: FAIL.
+- [x] **Step 3: Implementar `src/lib/drive.ts` e `src/lib/drive.fixture.ts`** conforme as regras acima. Em `titleFromFileName`, remova só a extensão final que estiver em `/\.(mp4|mov|m4v|webm|mkv|avi)$/i` e depois apare os espaços.
+- [x] **Step 4: Rodar e ver passar.** `npm test`. Esperado: PASS.
+- [x] **Step 5: Commit** `feat: load latest portfolio videos from Google Drive`
 
 ---
 
