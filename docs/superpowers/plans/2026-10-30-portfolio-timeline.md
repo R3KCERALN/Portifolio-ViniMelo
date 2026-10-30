@@ -21,7 +21,7 @@
 - WhatsApp: `https://wa.me/5591987491993`. Botão fixo **não verde**: fundo `#262626`, contorno `#3a3a3a`, texto cinza claro, ícone só em traço, rótulo "Conversar".
 - A chave `GOOGLE_DRIVE_API_KEY` só é lida no build (frontmatter Astro / `src/lib`) e nunca usa o prefixo `PUBLIC_`.
 - Pasta do Drive: ID `1ZyPhsGCoH-G2pOJFK9ihSGrPJfaHmxx2`, URL pública `https://drive.google.com/drive/folders/1ZyPhsGCoH-G2pOJFK9ihSGrPJfaHmxx2`.
-- Limite de reprodução direta: 100 MB (`100 * 1024 * 1024` bytes). Acima disso, ou sem tamanho conhecido, usar o iframe do Drive.
+- ~~Limite de reprodução direta: 100 MB~~ **Revogado em 2026-10-30:** o Drive responde 403 a qualquer vídeo embutido por outro site (`Sec-Fetch-Dest: video`, inclusive com CORS), e o Chrome bloqueia a resposta (`ERR_BLOCKED_BY_ORB`). Todos os vídeos usam o player do Drive (`/file/d/<ID>/preview`) em iframe com `loading="lazy"`, com a capa por baixo. Decisão do Allan.
 - Sem dependências novas além de `vitest` e dos componentes shadcn `card` e `badge`.
 - Visual sem cara de template: nada de gradientes decorativos, glassmorphism ou brilhos. A interface de edição é a estética.
 - Commits pequenos, mensagem em inglês no padrão `feat:` / `chore:` / `test:`, terminando com `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
