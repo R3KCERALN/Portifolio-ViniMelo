@@ -43,7 +43,7 @@ function TrackRow({ label, children, className = '' }: { label: string; children
   return (
     <div className={`flex min-h-0 flex-1 border-b border-[#111] ${className}`}>
       <div
-        className="hidden shrink-0 items-center justify-center border-r border-[#111] bg-[#262626] text-[10px] text-[#8a8a8a] md:flex"
+        className="hidden shrink-0 items-center justify-center border-r border-[#111] bg-[#262626] text-[10px] text-[#9a9a9a] md:flex"
         style={{ width: LABEL_W }}
         aria-hidden="true"
       >
@@ -102,7 +102,7 @@ export default function Timeline({ clips }: { clips: TimelineClip[] }) {
           {RULER_MARKS.map((s) => (
             <span
               key={s}
-              className="absolute top-0 h-full border-l border-[#4a4a4a] pl-1 text-[9px] leading-[22px] text-[#8a8a8a]"
+              className="absolute top-0 h-full border-l border-[#4a4a4a] pl-1 text-[9px] leading-[22px] text-[#9a9a9a]"
               style={{ left: `${(s / TIMELINE_TOTAL_SECONDS) * 100}%`, transform: s === TIMELINE_TOTAL_SECONDS ? 'translateX(-100%)' : undefined }}
             >
               {`${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`}

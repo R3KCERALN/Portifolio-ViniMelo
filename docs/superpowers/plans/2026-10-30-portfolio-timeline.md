@@ -523,11 +523,11 @@ Decisão da orquestradora: manter o azul `#4da3ff` e os cinzas já usados na tim
 
 **Evite** (lista do frontend-design): rótulo em caixa alta acima de cada título, `·` juntando metadados, `→` em links, sombra cinza igual em tudo, um raio só para tudo, palavra destacada em cor dentro do título, gradiente.
 
-- [ ] **Step 1: Fonte e tokens.** Instale `@fontsource-variable/archivo`, remova a Geist e reescreva os tokens do `.dark` em `global.css` conforme a tabela. `npm test` e `npm run build` (sem chave falha de propósito; use o dev para olhar).
-- [ ] **Step 2: Abertura** (layout + animação única). Confira em 1440 px e 375 px.
-- [ ] **Step 3: Portfólio** (coluna fixa + lista numerada). Confira se os clipes V2 da timeline continuam alinhados aos vídeos e se nenhum MP4 é baixado antes do play.
-- [ ] **Step 4: Processo.**
-- [ ] **Step 5: Contrate** (tabela + pacotes). Confira as 7 mensagens de WhatsApp no HTML gerado (devem ser as mesmas de antes).
-- [ ] **Step 6: Trabalhou com e rodapé.**
-- [ ] **Step 7: Verificação final** em 1440 px, 1024 px e 375 px (capturas para o progress.md): sem rolagem horizontal; pílula e timeline sem cobrir preços, botões ou controles do player; foco visível em todos os elementos com Tab; contraste ≥ 4.5:1 no texto; com `prefers-reduced-motion: reduce`, nenhuma animação de entrada; a agulha e os clipes ainda batem com as seções; `npm test` passando.
-- [ ] **Step 8: Commits** por etapa (`feat: redesign hero`, `feat: redesign portfolio section`…) ou um só `feat: editing-suite visual redesign`. Depois, a linha em `progress.md`.
+- [x] **Step 1: Fonte e tokens.** Instale `@fontsource-variable/archivo`, remova a Geist e reescreva os tokens do `.dark` em `global.css` conforme a tabela. `npm test` e `npm run build` (sem chave falha de propósito; use o dev para olhar).
+- [x] **Step 2: Abertura** (layout + animação única). Confira em 1440 px e 375 px.
+- [x] **Step 3: Portfólio** (coluna fixa + lista numerada). Confira se os clipes V2 da timeline continuam alinhados aos vídeos e se nenhum MP4 é baixado antes do play.
+- [x] **Step 4: Processo.**
+- [x] **Step 5: Contrate** (tabela + pacotes). Confira as 7 mensagens de WhatsApp no HTML gerado (devem ser as mesmas de antes).
+- [x] **Step 6: Trabalhou com e rodapé.**
+- [x] **Step 7: Verificação final** em 1440 px, 1024 px e 375 px (capturas para o progress.md): sem rolagem horizontal; pílula e timeline sem cobrir preços, botões ou controles do player; foco visível em todos os elementos com Tab; contraste ≥ 4.5:1 no texto; com `prefers-reduced-motion: reduce`, nenhuma animação de entrada; a agulha e os clipes ainda batem com as seções; `npm test` passando.
+- [x] **Step 8: Commits** por etapa (`feat: redesign hero`, `feat: redesign portfolio section`…) ou um só `feat: editing-suite visual redesign`. Depois, a linha em `progress.md`.
