@@ -178,7 +178,7 @@ export interface ClipBox { id: string; left: number; width: number } // percentu
 export function computeClips(sections: { id: string; top: number; height: number }[], docHeight: number): ClipBox[];
 ```
 
-- [ ] **Step 1: Escrever os testes que falham**
+- [x] **Step 1: Escrever os testes que falham**
 
 ```ts
 expect(progressToTimecode(0)).toBe('00:00:00:00');
@@ -195,10 +195,10 @@ expect(computeClips([{ id: 'abertura', top: 0, height: 1000 }, { id: 'portfolio'
 expect(computeClips([], 4000)).toEqual([]);
 ```
 
-- [ ] **Step 2: Rodar e ver falhar.** `npm test -- src/lib/timeline.test.ts`
-- [ ] **Step 3: Implementar.** Para os frames, use `Math.floor` sobre o total de frames.
-- [ ] **Step 4: Rodar e ver passar.** `npm test`
-- [ ] **Step 5: Commit** `feat: add timeline progress and timecode math`
+- [x] **Step 2: Rodar e ver falhar.** `npm test -- src/lib/timeline.test.ts`
+- [x] **Step 3: Implementar.** Para os frames, use `Math.floor` sobre o total de frames.
+- [x] **Step 4: Rodar e ver passar.** `npm test`
+- [x] **Step 5: Commit** `feat: add timeline progress and timecode math`
 
 ---
 
