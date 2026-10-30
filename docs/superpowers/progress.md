@@ -64,3 +64,8 @@ Protocolo: `docs/superpowers/orchestration.md`
   - Ruling: o contorno do VIP é `outline` de 2 px com offset negativo (não `ring`); "Mais vantajoso" é texto no canto, sem pílula. Foto da abertura: `object-contain` na moldura `#000` no desktop, então sobram faixas pretas laterais em volta do retrato (a moldura é o "monitor").
   - Limitação conhecida (igual a antes): nos últimos ~150–200 px da página (padding + rodapé) a agulha passa do clipe "Trabalhou com" e nenhum clipe fica ativo no desktop.
   - Não verificado: build com a chave real do Google; reprodução real dos vídeos; pôsteres (a fixture não tem). Revisão final (Opus 5.5, alto) pode começar.
+- [x] Ajuste pedido pelo Allan — capas dos vídeos — commit d4f2c9d — aguardando revisão
+  - Sem `thumbnailLink` (lista de exemplo do dev, ou arquivo que a API não devolva miniatura), a capa usa a miniatura pública do Drive `https://lh3.googleusercontent.com/d/<ID>=w1280`, que não exige chave porque a pasta é pública. Testado com `curl` nos 11 arquivos: 200, JPEG, quadro real do vídeo.
+  - Fixture: o institucional da SEA (`114ny…`) ganhou `videoMediaMetadata` 1280×720 (tirado da miniatura), para não aparecer espremido em 9:16 no dev. Os outros 10 são 1080×1920.
+  - Verificado no dev (CDP) em 1440 px e 375 px: capa visível nos vídeos 1, 2 e 9. `npm test`: 40/40.
+  - Achado à parte, já existia: aviso de hidratação no `Waveform` da timeline (Node e navegador arredondam `Math.sin` diferente na última casa). Só aparece no console; corrigir arredondando `y`/`height` a 3 casas.
