@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/sections/Hero.astro';
 import Footer from '@/components/sections/Footer.astro';
+import Clients from '@/components/sections/Clients.astro';
 import Hire from '@/components/sections/Hire.astro';
 import Process from '@/components/sections/Process.astro';
 import Portfolio from '@/components/sections/Portfolio.astro';
@@ -45,6 +46,7 @@ const clips = [
     <Portfolio videos={videos} posters={posters} />
     <Process />
     <Hire />
+    <Clients />
   </main>
   <Footer />
   <Timeline slot="timeline" client:load clips={clips} />

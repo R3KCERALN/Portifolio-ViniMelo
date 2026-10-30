@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import { clients, people } from '@/data/clients';
+---
+
+<section id="trabalhou-com" class="mx-auto w-full max-w-5xl scroll-mt-4 px-4 py-20 md:px-8">
+  <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Trabalhou com</h2>
+  <ul class="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+    {
+      clients.map((client) => (
+        <li class="flex h-16 items-center justify-center px-2">
+          <Image
+            src={client.logo}
+            alt={client.name}
+            width={240}
+            format="webp"
+            loading="lazy"
+            class:list={[
+              'max-h-14 w-auto max-w-44 object-contain',
+              client.treatment === 'circle' && 'aspect-square h-14 w-14 rounded-full object-cover',
+              client.treatment === 'brighten' && 'brightness-[1.8]',
+            ]}
+          />
+        </li>
+      ))
+    }
+  </ul>
+  {
+    people.length > 0 && (
+      <ul class="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-foreground/90">
+        {people.map((person) => (
+          <li>
+            <a href={person.url} target="_blank" rel="noopener" class="underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              {person.handle}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</section>

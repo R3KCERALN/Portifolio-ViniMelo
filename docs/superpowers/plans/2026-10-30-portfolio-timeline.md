@@ -398,7 +398,7 @@ expect(packs.filter(p => p.highlighted).map(p => p.id)).toEqual(['vip']);
 **Interfaces:**
 - Produces: `clients: { name: string; logo: ImageMetadata; treatment?: 'circle' | 'brighten' }[]`, `people: { handle: string; url: string }[]` (vazio)
 
-- [ ] **Step 1: Copiar as 14 logos** de `~/Downloads` para `src/assets/logos/`, renomeando para slug ASCII:
+- [x] **Step 1: Copiar as 14 logos** de `~/Downloads` para `src/assets/logos/`, renomeando para slug ASCII:
   - `acai-boca-roxa.png`
   - `coopenorte.png`
   - `eletromoveis.png`
@@ -413,8 +413,8 @@ expect(packs.filter(p => p.highlighted).map(p => p.id)).toEqual(['vip']);
   - `skyfit.png`
   - `yeda-carvalho.png`
   - `pro-cardiaco.png`
-- [ ] **Step 2: Escrever o teste que falha.** Verifica que `clients.length === 14`, que os nomes são únicos, que só `Fazz` tem `treatment: 'circle'`, que só `Yêda Carvalho` e `Clínica Pró-Cardíaco` têm `'brighten'` e que `people` é `[]`.
-- [ ] **Step 3: Rodar e ver falhar,** depois implementar `clients.ts` com os nomes:
+- [x] **Step 2: Escrever o teste que falha.** Verifica que `clients.length === 14`, que os nomes são únicos, que só `Fazz` tem `treatment: 'circle'`, que só `Yêda Carvalho` e `Clínica Pró-Cardíaco` têm `'brighten'` e que `people` é `[]`.
+- [x] **Step 3: Rodar e ver falhar,** depois implementar `clients.ts` com os nomes:
   - Açaí Boca Roxa
   - Coopenorte
   - Eletromóveis
@@ -429,14 +429,14 @@ expect(packs.filter(p => p.highlighted).map(p => p.id)).toEqual(['vip']);
   - Skyfit
   - Yêda Carvalho
   - Clínica Pró-Cardíaco
-- [ ] **Step 4: Rodar e ver passar.** `npm test`
-- [ ] **Step 5: Montar `Clients.astro`** (`id="trabalhou-com"`, título "Trabalhou com"):
+- [x] **Step 4: Rodar e ver passar.** `npm test`
+- [x] **Step 5: Montar `Clients.astro`** (`id="trabalhou-com"`, título "Trabalhou com"):
   - grade de logos em cores originais no fundo escuro, cada uma via `<Image width={240} format="webp" alt={name}>`, com altura visual uniforme (~56 px) e `object-contain`;
   - `circle`: `rounded-full`;
   - `brighten`: `filter: brightness(1.8)`, ajustado no olho até a logo ficar legível sem estourar;
   - a lista `people` aparece abaixo das logos só se tiver itens, sem espaço reservado nem "em breve".
-- [ ] **Step 6: Verificar.** No navegador, as 14 logos aparecem legíveis, a Fazz sem cantos cinza, e o `dist` contém só versões webp leves (< 40 KB cada).
-- [ ] **Step 7: Commit** `feat: add client logos section`
+- [x] **Step 6: Verificar.** No navegador, as 14 logos aparecem legíveis, a Fazz sem cantos cinza, e o `dist` contém só versões webp leves (< 40 KB cada).
+- [x] **Step 7: Commit** `feat: add client logos section`
 
 ---
 
