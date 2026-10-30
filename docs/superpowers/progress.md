@@ -17,3 +17,9 @@ Protocolo: `docs/superpowers/orchestration.md`
   - Ruling: erros de rede e HTTP nunca incluem a URL nem a chave (a chave vai na query string); falha de rede vira "Drive API inacessível". Custo se errado: mensagem de erro menos detalhada.
   - Ruling: `fetchLatestVideos` monta a query com `encodeURIComponent` (e não `URLSearchParams`) para o espaço sair como `%20`, como o teste do plano exige.
   - Pendente do usuário (não bloqueia o código): a chave `GOOGLE_DRIVE_API_KEY` real, para testar `fetchLatestVideos` contra a API de verdade. Os testes usam `fetch` falso.
+- [x] Task 5 — Timeline fixa — commit e467c52 — aguardando revisão
+  - Verificado em 1440 px e 375 px com uma página temporária (não commitada) com as 5 seções e 10 clipes V2 falsos: timecode de 00:00:03 a 01:00:00:00, agulha sobre o clipe da seção visível, clique em "Contrate" leva à seção, Tab percorre os 14 botões, sem rolagem horizontal, altura 120 px / 56 px, pílula acima da faixa.
+  - Ruling: a página real ainda só tem a abertura; `index.astro` passa só os clipes V1 e a timeline ignora ids sem elemento. Os clipes V2 (`video-1…N`) entram na Task 6, quando o Drive for lido na página (ler o Drive agora quebraria o build sem chave).
+  - Ruling: coluna de rótulos e timecode com 96 px (o plano não fixa o valor) para a régua ficar alinhada às trilhas.
+  - Ruling: no celular os clipes V2 ficam com ~11 px de largura (10 vídeos em 375 px), abaixo dos 44 px de alvo de toque. A spec manda a faixa fina com todos os clipes; a navegação por toque nos vídeos continua pela rolagem. Custo se errado: tocar no clipe certo é difícil no celular.
+  - Ao fim da página (padding + rodapé) nenhum clipe fica ativo; a agulha chega ao fim da régua sem clipe embaixo.
