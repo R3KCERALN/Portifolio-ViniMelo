@@ -2,22 +2,36 @@
 import { Image } from 'astro:assets';
 import vinicius from '@/assets/vinicius.png';
 import { site } from '@/data/site';
+
+const [firstName, ...rest] = site.name.split(' ');
+const lastName = rest.join(' ');
 ---
 
-<section id="abertura" class="mx-auto flex min-h-screen w-full max-w-6xl scroll-mt-4 flex-col items-center justify-center gap-10 px-4 py-16 md:flex-row md:gap-16 md:px-8">
-  <Image
-    src={vinicius}
-    alt="Vinicius Melo"
-    width={640}
-    widths={[320, 480, 640]}
-    sizes="(min-width: 768px) 384px, 70vw"
-    loading="eager"
-    class="aspect-[1121/1403] h-auto w-[70vw] max-w-sm rounded-lg border border-border object-cover md:w-96"
-  />
-  <div class="max-w-xl">
-    <h1 class="text-4xl font-semibold tracking-tight md:text-5xl">{site.name}</h1>
-    <p class="mt-2 text-lg text-primary">{site.role}</p>
-    <div class="mt-6 space-y-4 text-base leading-relaxed text-foreground/90">
+<section
+  id="abertura"
+  class="mx-auto w-full max-w-[80rem] scroll-mt-4 px-4 py-10 md:grid md:min-h-[calc(100svh-var(--timeline-h))] md:grid-cols-12 md:content-center md:px-8 md:py-16"
+>
+  <h1 class="display hero-title relative z-10 -mb-[0.3em] md:col-span-9 md:col-start-1 md:row-start-1 md:mb-0 md:self-end md:pb-6">
+    {firstName}<br />{lastName}
+  </h1>
+
+  <div class="hero-photo relative bg-[var(--monitor)] md:-ml-10 md:col-span-6 md:col-start-7 md:row-span-2 md:row-start-1 md:h-[min(calc(100svh-var(--timeline-h)-6rem),52rem)] md:self-center">
+    <Image
+      src={vinicius}
+      alt="Vinicius Melo"
+      width={800}
+      widths={[480, 640, 800]}
+      sizes="(min-width: 768px) 40rem, 100vw"
+      loading="eager"
+      class="aspect-[1121/1403] h-auto w-full object-cover md:aspect-auto md:size-full md:object-contain"
+    />
+    <div class="pointer-events-none absolute inset-[5%] border border-white/15" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute inset-[10%] border border-white/15" aria-hidden="true"></div>
+  </div>
+
+  <div class="mt-8 md:col-span-5 md:col-start-1 md:row-start-2 md:mt-0">
+    <p class="text-lg text-muted-foreground">{site.role}</p>
+    <div class="prose-block mt-6 space-y-4 text-foreground">
       {site.heroText.map((paragraph) => <p>{paragraph}</p>)}
     </div>
   </div>

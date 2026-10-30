@@ -93,8 +93,8 @@ export default function Timeline({ clips }: { clips: TimelineClip[] }) {
       {/* régua + timecode (só a partir de md) */}
       <div className="hidden h-[22px] shrink-0 border-b border-[#111] bg-[#262626] md:flex" aria-hidden="true">
         <div
-          className="flex shrink-0 items-center justify-center font-mono text-[11px] font-semibold tracking-wide text-[#4da3ff]"
-          style={{ width: LABEL_W, fontFamily: 'ui-monospace, Menlo, monospace' }}
+          className="flex shrink-0 items-center justify-center text-[11px] font-semibold tracking-wide text-[#4da3ff] tabular-nums"
+          style={{ width: LABEL_W }}
         >
           {progressToTimecode(progress)}
         </div>
