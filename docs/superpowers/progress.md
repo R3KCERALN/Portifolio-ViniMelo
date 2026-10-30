@@ -45,3 +45,10 @@ Protocolo: `docs/superpowers/orchestration.md`
   - Ruling: aparei a margem transparente de 7 logos (Eletromóveis, GG Eletrônicos, Nokia, Pró-Cardíaco, Sapatilhas.com, SEA Telecom, Skyfit) nas cópias de `src/assets/logos`, porque ocupavam só 19–70% da tela e saíam minúsculas (Pró-Cardíaco quase invisível). Os originais seguem em ~/Downloads. É a "otimização para web" da spec, sem mudar cor nem forma. Custo se errado: restaurar do Downloads.
   - Ruling: espaço de cada logo com `max-h-14` e `max-w-44` (o plano só fala em ~56 px de altura) para logos largas não ficarem miúdas.
   - `brightness(1.8)` aprovado no olho para Yêda Carvalho e Pró-Cardíaco.
+- [x] Task 10 — Publicação diária e revisão final — commit 2a0043b — aguardando revisão
+  - Criados `.github/workflows/daily-rebuild.yml` (cron `0 6 * * *` = 03:00 Brasília, `workflow_dispatch`, `permissions: {}`) e a seção "Publicação" do README, em 6 passos. Texto novo passou pelo no-ai-slop.
+  - Revisão no navegador (build de produção com a fixture forçada só no teste, já revertida; Chrome headless): 1440 px e 375 px percorridos sem rolagem horizontal; pílula "Conversar" 12 px acima da timeline em ambos; nenhum `<video>`/`<audio>` com autoplay e nenhum tocando; reduced motion → `scroll-behavior: auto` e etapas estáticas; rodapé abre `https://instagram.com/giovanni1.ia` em nova aba; 0 erros de JS; 90 paradas de Tab, todas com indicador de foco.
+  - Defeito achado e corrigido na revisão: a raiz do player Vidstack recebia foco por Tab sem indicador (o tema zera o contorno). Regra em `global.css` com o contorno azul.
+  - `npm test`: 40/40. `npm run build` **sem chave falha de propósito** (mensagem cita `GOOGLE_DRIVE_API_KEY`); o build completo com a chave real não foi rodado (a chave é do usuário).
+  - Risco conhecido do plano: o GitHub desativa workflows agendados em repositório público sem atividade por 60 dias (registrado no README).
+  - **Tasks 1 a 10 concluídas. A revisão final da branch inteira pode começar (Opus 5.5, alto).**
