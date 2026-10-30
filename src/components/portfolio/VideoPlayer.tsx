@@ -25,7 +25,7 @@ function DriveEmbed({ video, poster }: Props) {
 
   return (
     <div
-      className="relative w-full overflow-hidden rounded-lg border border-border bg-card"
+      className="relative w-full overflow-hidden rounded-[2px] bg-black"
       style={{ aspectRatio: video.aspectRatio }}
     >
       {started && playback.kind === 'iframe' ? (
@@ -67,7 +67,7 @@ export default function VideoPlayer({ video, poster }: Props) {
       posterLoad="visible"
       playsInline
       aspectRatio={String(video.aspectRatio)}
-      className="overflow-hidden rounded-lg border border-border bg-card"
+      className="overflow-hidden rounded-[2px] bg-black"
       style={{ '--video-brand': '#4da3ff' } as React.CSSProperties}
     >
       <MediaProvider>{poster && <Poster className="vds-poster" src={poster} alt="" />}</MediaProvider>

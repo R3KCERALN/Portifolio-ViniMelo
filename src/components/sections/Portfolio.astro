@@ -11,29 +11,36 @@ interface Props {
 const { videos, posters } = Astro.props;
 ---
 
-<section id="portfolio" class="mx-auto w-full max-w-5xl scroll-mt-4 px-4 py-20 md:px-8">
-  <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Portfólio</h2>
-  <div class="mt-12 space-y-20">
+<section id="portfolio" class="mx-auto flex w-full max-w-[80rem] scroll-mt-4 flex-col px-4 py-16 md:px-8 lg:grid lg:grid-cols-12 lg:gap-x-8 lg:py-24">
+  <div class="contents lg:col-span-4 lg:block lg:self-start lg:sticky lg:top-8">
+    <h2 class="display section-mark" style="--mark: #6fa8dc">Portfólio</h2>
+    <p class="order-last mt-12 lg:order-none lg:mt-8">
+      <a
+        href={site.driveFolderUrl}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex min-h-11 items-center rounded-[2px] border border-[#3a3a3a] bg-[#262626] px-5 text-sm font-medium text-foreground transition-colors hover:bg-[#2e2e2e] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      >
+        Ver mais trabalhos
+      </a>
+    </p>
+  </div>
+  <div class="mt-10 space-y-16 lg:col-span-8 lg:mt-0 lg:space-y-24">
     {
       videos.map((video, i) => (
-        <article id={`video-${i + 1}`} class="mx-auto flex scroll-mt-4 flex-col gap-4" style={`max-width: ${video.aspectRatio < 1 ? '22rem' : '56rem'}`}>
-          {/* O Vidstack não renderiza no servidor (usa `window`), então o player só existe no navegador. O bloco reserva o espaço para a página não saltar. */}
-          <div class="rounded-lg bg-card" style={`aspect-ratio: ${video.aspectRatio}`}>
-            <VideoPlayer client:only="react" video={video} poster={posters[i]} />
+        <article id={`video-${i + 1}`} class="flex scroll-mt-4 flex-col gap-3 md:flex-row md:gap-6">
+          <span class="display tabular shrink-0 text-7xl md:w-28 md:text-8xl" style="color: #6fa8dc" aria-hidden="true">{i + 1}</span>
+          <div class="min-w-0 flex-1">
+            <div class="w-full" style={`max-width: ${video.aspectRatio < 1 ? '22rem' : '100%'}`}>
+              {/* O Vidstack não renderiza no servidor (usa `window`), então o player só existe no navegador. O bloco reserva o espaço para a página não saltar. */}
+              <div class="rounded-[2px] bg-[var(--monitor)]" style={`aspect-ratio: ${video.aspectRatio}`}>
+                <VideoPlayer client:only="react" video={video} poster={posters[i]} />
+              </div>
+              <h3 class="mt-3 text-sm leading-snug text-muted-foreground md:text-base">{video.title}</h3>
+            </div>
           </div>
-          <h3 class="text-sm leading-snug font-medium text-muted-foreground md:text-base">{video.title}</h3>
         </article>
       ))
     }
   </div>
-  <p class="mt-16 text-center">
-    <a
-      href={site.driveFolderUrl}
-      target="_blank"
-      rel="noopener"
-      class="inline-flex min-h-11 items-center rounded-md border border-border px-5 text-sm text-foreground transition-colors hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-    >
-      Ver mais trabalhos
-    </a>
-  </p>
 </section>
