@@ -2,6 +2,8 @@ export interface Tier {
   id: 'basico' | 'intermediario' | 'complexo' | 'outros';
   name: string;
   description: string;
+  /** Texto curto da linha da tabela; a `description` aprovada vai numa segunda linha menor. */
+  shortDescription: string;
   price: number | null;
   priceNote?: string;
   whatsappMessage: string;
@@ -23,6 +25,7 @@ export const tiers: Tier[] = [
   {
     id: 'basico',
     name: 'Básico',
+    shortDescription: 'Reels ou TikTok de até 1 min',
     description: 'Reels/TikTok de até 1 min, edição única',
     price: 40,
     whatsappMessage: message('em um vídeo Básico'),
@@ -30,6 +33,7 @@ export const tiers: Tier[] = [
   {
     id: 'intermediario',
     name: 'Intermediário',
+    shortDescription: 'Até 1 min, com mais efeitos',
     description: 'Reels/TikTok de até 1 min com mais efeitos e pós-processamento',
     price: 60,
     whatsappMessage: message('em um vídeo Intermediário'),
@@ -37,6 +41,7 @@ export const tiers: Tier[] = [
   {
     id: 'complexo',
     name: 'Complexo',
+    shortDescription: 'Efeitos, pós-produção e after movies',
     description: 'Reels/TikTok com edição, efeitos e pós-processamento mais pesados; after movies (sem limite de 1 min)',
     price: null,
     priceNote: 'Negociado conforme a ideia do vídeo',
@@ -45,6 +50,7 @@ export const tiers: Tier[] = [
   {
     id: 'outros',
     name: 'Outros formatos',
+    shortDescription: 'YouTube, Shorts e vídeos acima de 1 min',
     description: 'Shorts, vídeo longo para YouTube, criativo para tráfego, vídeos acima de 1 min',
     price: null,
     whatsappMessage: message('em outro formato de vídeo'),

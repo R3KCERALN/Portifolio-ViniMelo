@@ -24,6 +24,27 @@ export const site = {
     'Você manda o material bruto e a ideia, e eu devolvo o vídeo pronto para postar, dentro do prazo e do jeito que foi pedido no briefing. Já editei para empresas como Nokia, SEA Telecom e Skyfit, de criativos para tráfego a vídeos institucionais.',
   customContractText:
     'Precisa de uma rotina de vídeos com outro formato ou volume? A gente define junto a quantidade, os níveis de edição e o período da parceria.',
-  invoiceNote: 'Emito nota fiscal de serviço, caso você precise.',
+  invoiceNote: 'Emissão de nota fiscal disponível.',
+  // Textos curtos das referências do Allan (Task 12). Os eyebrows ficam em caixa normal; a caixa alta vem do CSS.
+  heroEyebrow: 'Editor de vídeo & filmmaker',
+  heroTagline: 'Sua ideia, no próximo frame.',
+  heroLead: 'Edição com ritmo, atenção aos detalhes e respeito ao seu briefing.',
+  portfolioEyebrow: '02 / Trabalhos selecionados',
+  portfolioTagline: 'Edição que dá ritmo à sua ideia.',
+  processEyebrow: '03 / Nos bastidores',
+  processTagline: 'Do material bruto ao último detalhe.',
+  processStepLabels: [
+    'Corte do material bruto',
+    'Tratamento de áudio',
+    'Ajuste de imagem',
+    'Texto e legendas',
+    'Efeitos e pós-produção',
+  ],
+  timelapseLabel: 'Um olhar sobre a minha edição',
+  hireEyebrow: '04 / Vamos criar juntos',
+  hireTagline: 'Você traz o material e a ideia. Eu entrego o vídeo pronto para postar.',
+  customContractLead: 'Precisa de outro volume ou formato?',
+  customContractRest: 'Vamos montar seu contrato.',
+  clientsEyebrow: '05 / Clientes',
   credit: { label: 'Portfólio desenvolvido por @giovanni1.ia', href: 'https://instagram.com/giovanni1.ia' },
 } as const;

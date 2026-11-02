@@ -1,0 +1,65 @@
+---
+import ArrowIcon from '@/components/ArrowIcon.astro';
+import { whatsappUrl } from '@/lib/whatsapp';
+
+// Cada link leva à seção e, quando ela está na tela, ganha o sublinhado na cor dela.
+const links = [
+  { href: '#portfolio', label: 'Portfólio', color: 'var(--blue)' },
+  { href: '#processo', label: 'Processo', color: 'var(--green)' },
+  { href: '#contrate', label: 'Contato', color: 'var(--pink)' },
+];
+---
+
+<header class="fixed inset-x-0 top-0 z-40 bg-background" style="height: var(--header-h)">
+  <div class="page h-full">
+    <div class="flex h-full items-center justify-between border-b border-rule-strong">
+      <a href="#abertura" class="text-[1.75rem] leading-none font-black tracking-[-0.04em] text-cream" aria-label="Vinicius Melo, ir para o início">VM.</a>
+      <nav aria-label="Seções" class="flex items-center gap-2 md:gap-6">
+        <ul class="hidden items-center gap-1 md:flex lg:gap-3">
+          {
+            links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  data-nav={link.href.slice(1)}
+                  style={`--c: ${link.color}`}
+                  class="block px-3 py-2 text-[1.0625rem] text-body transition-colors hover:text-cream data-[active]:text-cream data-[active]:shadow-[inset_0_-2px_0_var(--c)]"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <a href={whatsappUrl()} target="_blank" rel="noopener" class="btn !min-h-10 text-[0.9375rem]">
+          Vamos conversar <ArrowIcon />
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Marca o link da seção que está sob o menu (faixa logo abaixo do cabeçalho).
+  const links = document.querySelectorAll<HTMLAnchorElement>('[data-nav]');
+  const ids = Array.from(links, (a) => a.dataset.nav!);
+  const visible = new Set<string>();
+  const sync = () => {
+    // A seção mais abaixo no menu que ainda está visível ganha o destaque.
+    const current = ids.filter((id) => visible.has(id)).at(-1);
+    links.forEach((a) => (a.dataset.nav === current ? a.setAttribute('data-active', '') : a.removeAttribute('data-active')));
+  };
+  const header = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 76;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) (e.isIntersecting ? visible.add : visible.delete).call(visible, (e.target as HTMLElement).id);
+      sync();
+    },
+    // Linha de leitura: faixa fina um pouco abaixo do menu.
+    { rootMargin: `-${header + 8}px 0px -${window.innerHeight - header - 40}px 0px` },
+  );
+  ids.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+</script>

@@ -2,12 +2,26 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/archivo/wdth.css";
+@import "@fontsource/ibm-plex-mono/latin-400.css";
+@import "@fontsource/ibm-plex-mono/latin-500.css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
     --font-heading: var(--font-sans);
     --font-sans: 'Archivo Variable', sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --color-panel: var(--panel);
+    --color-rule: var(--rule);
+    --color-rule-strong: var(--rule-strong);
+    --color-cream: var(--cream);
+    --color-body: var(--text);
+    --color-dim: var(--dim);
+    --color-lilac: var(--lilac);
+    --color-blue: var(--blue);
+    --color-green: var(--green);
+    --color-pink: var(--pink);
+    --color-yellow: var(--yellow);
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -85,111 +99,83 @@
 }
 
 .dark {
-    --background: #1d1d1d;
-    --foreground: #e6e6e6;
-    --card: #232323;
-    --card-foreground: #e6e6e6;
-    --popover: #232323;
-    --popover-foreground: #e6e6e6;
-    --primary: #4da3ff;
-    --primary-foreground: #00111f;
-    --secondary: #262626;
-    --secondary-foreground: #e6e6e6;
-    --muted: #232323;
-    --muted-foreground: #9a9a9a;
-    --accent: #262626;
-    --accent-foreground: #e6e6e6;
+    --background: #121211;
+    --foreground: #ece6dd;
+    --card: #181819;
+    --card-foreground: #ece6dd;
+    --popover: #181819;
+    --popover-foreground: #ece6dd;
+    --primary: #8bb5ed;
+    --primary-foreground: #121211;
+    --secondary: #181819;
+    --secondary-foreground: #ece6dd;
+    --muted: #181819;
+    --muted-foreground: #c9c7c6;
+    --accent: #181819;
+    --accent-foreground: #ece6dd;
     --destructive: oklch(0.704 0.191 22.216);
-    --border: #111;
-    --input: #3a3a3a;
-    --ring: #4da3ff;
-    --chart-1: #a98bd6;
-    --chart-2: #6fa8dc;
-    --chart-3: #7cc48a;
-    --chart-4: #e8a0bf;
-    --chart-5: #e6c26e;
-    --sidebar: #1d1d1d;
-    --sidebar-foreground: #e6e6e6;
-    --sidebar-primary: #4da3ff;
-    --sidebar-primary-foreground: #00111f;
-    --sidebar-accent: #262626;
-    --sidebar-accent-foreground: #e6e6e6;
-    --sidebar-border: #111;
-    --sidebar-ring: #4da3ff;
-    /* faixa da linha do tempo: painel, trilha, rótulo, fio, monitor */
-    --track: #232323;
-    --track-label: #262626;
-    --hairline: #111;
-    --monitor: #000;
+    --border: #2f2e2c;
+    --input: #2f2e2c;
+    --ring: #8bb5ed;
+    --chart-1: #c59fe6;
+    --chart-2: #8bb5ed;
+    --chart-3: #92d59b;
+    --chart-4: #f1a9ca;
+    --chart-5: #e8c683;
+    --sidebar: #121211;
+    --sidebar-foreground: #ece6dd;
+    --sidebar-primary: #8bb5ed;
+    --sidebar-primary-foreground: #121211;
+    --sidebar-accent: #181819;
+    --sidebar-accent-foreground: #ece6dd;
+    --sidebar-border: #2f2e2c;
+    --sidebar-ring: #8bb5ed;
+    /* tokens da Task 12, medidos nas referências */
+    --panel: #181819;
+    --rule: #2f2e2c;
+    --rule-strong: #4f4f4f;
+    --cream: #faf1e8;
+    --text: #ece6dd;
+    --dim: #c9c7c6;
+    --lilac: #c59fe6;
+    --blue: #8bb5ed;
+    --green: #92d59b;
+    --pink: #f1a9ca;
+    --yellow: #e8c683;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
     }
-  body {
-    @apply bg-background text-foreground;
-    padding-bottom: var(--timeline-h);
-    }
   html {
     @apply font-sans;
+    scroll-padding-top: var(--header-h);
     }
-  h1, h2, h3 {
-    @apply text-balance;
+  body {
+    @apply bg-background text-foreground;
+    padding-top: var(--header-h);
+    padding-bottom: var(--timeline-h);
+    font-weight: 400;
+    }
+  section[id] {
+    scroll-margin-top: var(--header-h);
+    }
+  :focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
     }
 }
 
-/* Títulos: Archivo condensada, pesada e apertada, como o texto de uma legenda de edição. */
-.display {
-  font-stretch: 75%;
-  font-weight: 850;
-  line-height: 0.92;
-  letter-spacing: -0.01em;
-}
-
-.prose-block {
-  max-width: 65ch;
-  font-size: 1.0625rem;
-  line-height: 1.6;
-}
-
-.tabular {
-  font-variant-numeric: tabular-nums;
-}
-
-h1.display {
-  font-size: clamp(4.5rem, 14vw, 12rem);
-}
-
-h2.display {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-}
-
-/* Marcador quadrado na cor do clipe da seção, antes do h2. */
-.section-mark::before {
-  content: '';
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin-right: 0.35em;
-  vertical-align: 0.12em;
-  background: var(--mark, var(--primary));
+:root {
+  --header-h: 64px;
+  --timeline-h: 72px;
 }
 
 @media (min-width: 768px) {
   :root {
-    --timeline-h: 120px;
-  }
-}
-
-/* Espaço que a pílula "Conversar" (fixa à direita) ocupa fora da coluna da página; as linhas com botão deixam essa folga para não ficarem sob ela. */
-:root {
-  --pill-gutter: 0px;
-}
-
-@media (min-width: 1024px) {
-  :root {
-    --pill-gutter: max(0px, calc(130px - max(0px, (100vw - 80rem) / 2)));
+    --header-h: 76px;
+    --timeline-h: 208px;
   }
 }
 
@@ -199,6 +185,139 @@ h2.display {
   }
 }
 
+/* Largura da página: 90rem no máximo, margem lateral de 5% (16 px no celular). */
+.page {
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding-inline: 5%;
+  }
+}
+
+/* Títulos: Archivo normal, 900, bem apertada, como nas referências. */
+.display {
+  font-weight: 900;
+  font-stretch: 100%;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: var(--cream);
+}
+
+h1.display {
+  font-size: clamp(3.5rem, 9.5vw, 9.5rem);
+}
+
+h2.display {
+  font-size: clamp(2.75rem, 5.2vw, 5.25rem);
+}
+
+/* Eyebrow: mono em caixa alta. O texto fica em caixa normal no HTML; a caixa alta vem daqui. */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: clamp(0.8rem, 1.1vw, 1.0625rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent, var(--blue));
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.subtitle {
+  font-size: clamp(1.125rem, 1.4vw, 1.375rem);
+  font-weight: 400;
+  color: var(--text);
+}
+
+/* Botões das referências: contorno creme ou preenchido, raio de 3 px. */
+.btn {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1.5px solid var(--cream);
+  border-radius: 3px;
+  padding: 0 1.25rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--cream);
+  background: transparent;
+  transition: background-color 0.15s;
+}
+
+.btn:hover {
+  background: color-mix(in srgb, var(--cream) 10%, transparent);
+}
+
+.btn-fill {
+  border-color: transparent;
+  background: var(--fill, var(--lilac));
+  color: var(--background);
+  font-weight: 600;
+}
+
+.btn-fill:hover {
+  background: var(--fill, var(--lilac));
+  filter: brightness(1.08);
+}
+
+/* Moldura com quatro cantoneiras em L, como o enquadramento de uma câmera. */
+.corners {
+  position: relative;
+}
+
+.corners::before,
+.corners::after,
+.corners > .corner-b::before,
+.corners > .corner-b::after {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 0 solid var(--cream);
+  pointer-events: none;
+}
+
+.corners::before {
+  top: 0;
+  left: 0;
+  border-top-width: 2px;
+  border-left-width: 2px;
+}
+
+.corners::after {
+  top: 0;
+  right: 0;
+  border-top-width: 2px;
+  border-right-width: 2px;
+}
+
+.corners > .corner-b::before {
+  bottom: 0;
+  left: 0;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+}
+
+.corners > .corner-b::after {
+  bottom: 0;
+  right: 0;
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+}
 
 /* A única animação de entrada da página: o nome aparece num wipe e a foto entra num corte seco logo depois. */
 @media (prefers-reduced-motion: no-preference) {
@@ -230,6 +349,6 @@ h2.display {
 
 /* Os controles nativos do timelapse desenham o próprio foco; o vídeo em si também precisa de contorno quando recebe Tab. */
 video:focus-visible {
-  outline: 2px solid var(--primary);
+  outline: 2px solid var(--blue);
   outline-offset: 2px;
 }
