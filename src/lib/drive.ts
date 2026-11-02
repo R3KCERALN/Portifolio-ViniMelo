@@ -2,6 +2,7 @@ import { driveFixture } from './drive.fixture';
 
 const DEFAULT_LIMIT = 10;
 const VIDEO_EXTENSION = /\.(mp4|mov|m4v|webm|mkv|avi)$/i;
+const IMAGE_EXTENSION = /\.(jpe?g|png|webp)$/i;
 
 export interface DriveFile {
   id: string;
@@ -25,6 +26,27 @@ export interface PortfolioVideo {
 
 export function titleFromFileName(name: string): string {
   return name.replace(VIDEO_EXTENSION, '').trim();
+}
+
+/**
+ * Capa personalizada: uma imagem na mesma pasta com o mesmo nome do vídeo (ex.: `Logo 3D.jpg` para `Logo 3D.mp4`).
+ * Serve para vídeos cuja miniatura do Drive é um quadro preto ou branco.
+ */
+function withCustomCovers(videos: PortfolioVideo[], files: DriveFile[]): PortfolioVideo[] {
+  const key = (name: string) => name.trim().toLowerCase();
+  const covers = new Map(
+    files
+      .filter((f) => f.mimeType.startsWith('image/'))
+      .map((f) => [key(f.name.replace(IMAGE_EXTENSION, '')), f] as const),
+  );
+  return videos.map((video) => {
+    const cover = covers.get(key(video.title));
+    if (!cover) return video;
+    const posterUrl = cover.thumbnailLink
+      ? cover.thumbnailLink.replace(/=s\d+$/, '=s1280')
+      : `https://lh3.googleusercontent.com/d/${cover.id}=w1280`;
+    return { ...video, posterUrl };
+  });
 }
 
 export function isVideoFile(file: DriveFile): boolean {
@@ -78,7 +100,8 @@ export async function fetchLatestVideos(opts: {
   if (!response.ok) throw new Error(`Drive API respondeu ${response.status}.`);
 
   const data = (await response.json()) as { files?: DriveFile[] };
-  const videos = (data.files ?? []).filter(isVideoFile).slice(0, limit).map(toPortfolioVideo);
+  const files = data.files ?? [];
+  const videos = withCustomCovers(files.filter(isVideoFile).slice(0, limit).map(toPortfolioVideo), files);
   if (videos.length === 0) {
     throw new Error(`A pasta do Drive (${folderId}) não tem nenhum vídeo; o portfólio não será publicado vazio.`);
   }

@@ -150,6 +150,35 @@ describe('fetchLatestVideos', () => {
   });
 });
 
+describe('custom cover', () => {
+  const image = (name: string, extra: Partial<DriveFile> = {}): DriveFile => ({
+    id: `img-${name}`,
+    name,
+    mimeType: 'image/jpeg',
+    createdTime: '2026-10-01T00:00:00.000Z',
+    ...extra,
+  });
+
+  it('uses an image with the same name as the video as its cover', async () => {
+    const files = makeFiles(2, [image('Video 1.jpg')]);
+    const videos = await fetchLatestVideos({ apiKey: 'K', folderId: FOLDER, fetchImpl: fakeFetch({ files }) });
+    expect(videos[1].posterUrl).toBe('https://lh3.googleusercontent.com/d/img-Video 1.jpg=w1280');
+    expect(videos[0].posterUrl).toBe('https://lh3.googleusercontent.com/d/v0=w1280');
+  });
+
+  it('matches ignoring case, spaces before the extension and the image format', async () => {
+    const files = makeFiles(1, [image('video 0 .PNG', { thumbnailLink: 'https://lh3.googleusercontent.com/abc=s220' })]);
+    const [video] = await fetchLatestVideos({ apiKey: 'K', folderId: FOLDER, fetchImpl: fakeFetch({ files }) });
+    expect(video.posterUrl).toBe('https://lh3.googleusercontent.com/abc=s1280');
+  });
+
+  it('never counts the cover image as a video', async () => {
+    const files = makeFiles(1, [image('Video 0.jpg')]);
+    const videos = await fetchLatestVideos({ apiKey: 'K', folderId: FOLDER, fetchImpl: fakeFetch({ files }) });
+    expect(videos).toHaveLength(1);
+  });
+});
+
 describe('loadPortfolio', () => {
   it('uses the fixture in dev without a key, without calling fetch', async () => {
     const fetchImpl = fakeFetch({});
