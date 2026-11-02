@@ -1,38 +1,50 @@
 ---
 import { Image } from 'astro:assets';
+import ArrowIcon from '@/components/ArrowIcon.astro';
 import vinicius from '@/assets/vinicius.png';
 import { site } from '@/data/site';
+import { whatsappUrl } from '@/lib/whatsapp';
 
 const [firstName, ...rest] = site.name.split(' ');
-const lastName = rest.join(' ');
+// O ponto final faz parte do título, como na referência.
+const lastName = `${rest.join(' ')}.`;
+const brands = ['Nokia', 'SEA Telecom', 'Skyfit'];
 ---
 
-<section
-  id="abertura"
-  class="mx-auto w-full max-w-[80rem] scroll-mt-4 px-4 py-10 md:grid md:min-h-[calc(100svh-var(--timeline-h))] md:grid-cols-12 md:content-center md:px-8 md:py-16"
->
-  <h1 class="display hero-title relative z-10 -mb-[0.3em] md:col-span-9 md:col-start-1 md:row-start-1 md:mb-0 md:self-end md:pb-6">
-    {firstName}<br />{lastName}
-  </h1>
+<section id="abertura" class="page py-8 md:flex md:min-h-[calc(100svh-var(--header-h)-var(--timeline-h))] md:flex-col md:py-6" style="--accent: var(--lilac)">
+  <div class="grid gap-10 md:flex-1 md:grid-cols-[1.3fr_1fr] md:items-center md:gap-8">
+    <div>
+      <p class="eyebrow">{site.heroEyebrow}</p>
+      <h1 class="display hero-title mt-3 pb-1">{firstName}<br />{lastName}</h1>
+      <p class="mt-5 text-[clamp(1.75rem,2.8vw,2.75rem)] leading-tight font-medium text-body">{site.heroTagline}</p>
+      <p class="mt-2 text-[clamp(1.0625rem,1.4vw,1.375rem)] text-body">{site.heroLead}</p>
+      <div class="mt-7 flex flex-wrap gap-4">
+        <a href="#portfolio" class="btn btn-fill btn-lg">Ver portfólio <ArrowIcon size={20} /></a>
+        <a href={whatsappUrl()} target="_blank" rel="noopener" class="btn btn-lg">Vamos conversar</a>
+      </div>
+    </div>
 
-  <div class="hero-photo relative bg-[var(--monitor)] md:-ml-10 md:col-span-6 md:col-start-7 md:row-span-2 md:row-start-1 md:h-[min(calc(100svh-var(--timeline-h)-6rem),52rem)] md:self-center">
-    <Image
-      src={vinicius}
-      alt="Vinicius Melo"
-      width={800}
-      widths={[480, 640, 800]}
-      sizes="(min-width: 768px) 40rem, 100vw"
-      loading="eager"
-      class="aspect-[1121/1403] h-auto w-full object-cover md:aspect-auto md:size-full md:object-contain"
-    />
-    <div class="pointer-events-none absolute inset-[5%] border border-white/15" aria-hidden="true"></div>
-    <div class="pointer-events-none absolute inset-[10%] border border-white/15" aria-hidden="true"></div>
+    <div class="hero-photo corners mx-auto w-full max-w-md px-6 pt-9 pb-10 md:max-w-none">
+      <span class="mono absolute top-0 right-9 text-[0.8rem] tracking-[0.18em] text-dim uppercase">01 / Abertura</span>
+      <Image
+        src={vinicius}
+        alt="Vinicius Melo"
+        width={800}
+        widths={[480, 640, 800]}
+        sizes="(min-width: 768px) 36rem, 90vw"
+        loading="eager"
+        class="aspect-[482/530] max-h-[calc(100svh-var(--header-h)-var(--timeline-h)-14rem)] min-h-64 w-full object-cover object-[50%_20%] md:aspect-auto md:h-[min(30rem,calc(100svh-var(--header-h)-var(--timeline-h)-14rem))]"
+      />
+      <span data-timecode class="mono absolute right-9 bottom-1.5 text-[0.8rem] tracking-[0.08em] text-body">00:00:00:00</span>
+      <span class="corner-b"></span>
+    </div>
   </div>
 
-  <div class="mt-8 md:col-span-5 md:col-start-1 md:row-start-2 md:mt-0">
-    <p class="text-lg text-muted-foreground">{site.role}</p>
-    <div class="prose-block mt-6 space-y-4 text-foreground">
-      {site.heroText.map((paragraph) => <p>{paragraph}</p>)}
-    </div>
+  <ul class="mt-10 flex flex-wrap gap-x-12 gap-y-2 border-t border-rule-strong pt-5 pb-2 md:mt-6" aria-label="Trabalhou com">
+    {brands.map((brand) => <li class="mono text-[0.9375rem] tracking-[0.18em] text-dim uppercase">{brand}</li>)}
+  </ul>
+
+  <div class="mt-10 grid gap-6 md:grid-cols-2 md:gap-12">
+    {site.heroText.map((paragraph) => <p class="max-w-[60ch] text-[1.0625rem] leading-relaxed text-dim md:text-lg">{paragraph}</p>)}
   </div>
 </section>

@@ -187,7 +187,7 @@
 
 /* Largura da página: 90rem no máximo, margem lateral de 5% (16 px no celular). */
 .page {
-  width: 100%;
+  box-sizing: content-box;
   max-width: 90rem;
   margin-inline: auto;
   padding-inline: 1rem;
@@ -202,18 +202,20 @@
 /* Títulos: Archivo normal, 900, bem apertada, como nas referências. */
 .display {
   font-weight: 900;
-  font-stretch: 100%;
+  font-stretch: 86%;
   letter-spacing: -0.04em;
   line-height: 0.9;
   color: var(--cream);
 }
 
 h1.display {
-  font-size: clamp(3.5rem, 9.5vw, 9.5rem);
+  font-size: clamp(3.5rem, 13vw, 13rem);
+  line-height: 0.8;
 }
 
 h2.display {
-  font-size: clamp(2.75rem, 5.2vw, 5.25rem);
+  font-size: clamp(2.75rem, 5.7vw, 5.75rem);
+  line-height: 0.88;
 }
 
 /* Eyebrow: mono em caixa alta. O texto fica em caixa normal no HTML; a caixa alta vem daqui. */
@@ -351,4 +353,10 @@ h2.display {
 video:focus-visible {
   outline: 2px solid var(--blue);
   outline-offset: 2px;
+}
+
+.btn-lg {
+  min-height: 3.25rem;
+  padding: 0 1.5rem;
+  font-size: 1.25rem;
 }
