@@ -102,3 +102,7 @@ Protocolo: `docs/superpowers/orchestration.md`
     9. `SEA Telecom 10 anos - Institucional - Filme de comemoração`
     10. `Spoiler de promoção - Criativo - Calçados`
     11. `Vídeo trend - Criativo`
+- [x] Ajuste pedido pelo Allan — vídeo deslocado no carrossel — commit `fix: keep Drive player at least 20rem wide` — aguardando revisão
+  - Sintoma: o play aparecia deslocado para a direita (só clicava no vazio ao lado) e o vídeo tocando saía metade preto e cortado.
+  - Causa: o player do Drive monta a página dele com ~320 px de largura no mínimo. Os cards verticais tinham 224 px, então o conteúdo passava do iframe e o centro (onde fica o play) caía fora do centro visível.
+  - Correção: a caixa da mídia nunca é mais estreita que 20rem; o vídeo vertical fica com faixas pretas dos dois lados e o play centrado. Em 1440 px cabem ~4 cards. Conferido no dev (CDP) em 1586 e 375 px. Não deu para testar a reprodução (o headless não toca).

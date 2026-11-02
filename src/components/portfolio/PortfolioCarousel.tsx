@@ -140,9 +140,13 @@ export default function PortfolioCarousel({ videos }: { videos: CarouselVideo[] 
             key={video.n}
             id={`video-${video.n}`}
             className="shrink-0 snap-start scroll-mt-24"
-            style={{ width: `max(14rem, calc(var(--media-h) * ${video.aspectRatio.toFixed(4)}))` }}
+            style={{ width: `max(20rem, calc(var(--media-h) * ${video.aspectRatio.toFixed(4)}))` }}
           >
-            <div className="relative overflow-hidden bg-black" style={{ height: 'var(--media-h)' }}>
+            {/* O player do Drive monta a página dele com pelo menos ~320 px de largura. Num iframe mais estreito ele passa do quadro e o play, que fica no centro dessa página, aparece deslocado e fora do clique. Por isso a caixa nunca é mais estreita que 20rem; o vídeo vertical fica com faixas pretas dos dois lados. */}
+            <div
+              className="relative overflow-hidden bg-black"
+              style={{ height: 'var(--media-h)', width: `max(20rem, calc(var(--media-h) * ${video.aspectRatio.toFixed(4)}))`, maxWidth: '100%' }}
+            >
               {video.poster && <img src={video.poster} alt="" loading="lazy" className="absolute inset-0 size-full object-cover" />}
               {/* O Drive só toca vídeo no player dele. A capa fica por baixo enquanto o player carrega; ele só carrega perto da tela. */}
               <iframe
