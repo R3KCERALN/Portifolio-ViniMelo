@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { clients, people } from '@/data/clients';
+import { site } from '@/data/site';
 
 // Células vazias no fim da última linha, para a grade não ter buraco: quantas faltam muda com o número de colunas.
 const missing = (cols: number) => (cols - (clients.length % cols)) % cols;
@@ -8,12 +9,13 @@ const [miss2, miss3, miss5] = [missing(2), missing(3), missing(5)];
 const fillers = [1, 2, 3, 4];
 ---
 
-<section id="trabalhou-com" class="mx-auto w-full max-w-[80rem] scroll-mt-4 px-4 py-16 md:px-8 lg:py-24">
-  <h2 class="display section-mark" style="--mark: #e6c26e">Trabalhou com</h2>
-  <ul role="list" class="mt-10 grid grid-cols-2 gap-px bg-[#111] sm:grid-cols-3 lg:grid-cols-5">
+<section id="trabalhou-com" class="page py-14 md:py-20" style="--accent: var(--yellow)">
+  <p class="eyebrow">{site.clientsEyebrow}</p>
+  <h2 class="display mt-2">Trabalhou com.</h2>
+  <ul role="list" class="mt-10 grid grid-cols-2 gap-px border border-rule bg-rule sm:grid-cols-3 lg:grid-cols-5">
     {
       clients.map((client) => (
-        <li class="flex h-22 items-center justify-center bg-[#232323] px-3 sm:h-28">
+        <li class="flex h-22 items-center justify-center bg-background px-3 sm:h-28">
           <Image
             src={client.logo}
             alt={client.name}
@@ -34,7 +36,7 @@ const fillers = [1, 2, 3, 4];
         <li
           aria-hidden="true"
           class:list={[
-            'h-22 bg-[#232323] sm:h-28',
+            'h-22 bg-background sm:h-28',
             n <= miss2 ? 'block' : 'hidden',
             n <= miss3 ? 'sm:block' : 'sm:hidden',
             n <= miss5 ? 'lg:block' : 'lg:hidden',

@@ -39,15 +39,6 @@ const carouselVideos = videos.map((video, i) => ({
   poster: posters[i],
   aspectRatio: video.aspectRatio,
 }));
-
-// Cores dos clipes: ver Global Constraints do plano. Ids sem elemento na página são ignorados.
-const clips = [
-  { id: 'abertura', label: 'Abertura', track: 'V1', color: '#a98bd6' },
-  ...videos.map((_, i) => ({ id: `video-${i + 1}`, label: String(i + 1), track: 'V2', color: '#6fa8dc' })),
-  { id: 'processo', label: 'Processo', track: 'V1', color: '#7cc48a' },
-  { id: 'contrate', label: 'Contrate', track: 'V1', color: '#e8a0bf' },
-  { id: 'trabalhou-com', label: 'Trabalhou com', track: 'V1', color: '#e6c26e' },
-];
 ---
 
 <BaseLayout title={`${site.name} — ${site.role}`} description={site.heroText[0]}>
@@ -59,5 +50,5 @@ const clips = [
     <Clients />
   </main>
   <Footer />
-  <Timeline slot="timeline" client:load clips={clips} />
+  <Timeline slot="timeline" client:load videoCount={videos.length} />
 </BaseLayout>
