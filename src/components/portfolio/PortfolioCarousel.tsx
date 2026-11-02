@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Play } from 'lucide-react';
 import { CATEGORY_ORDER, categoryLabel, categoryTabLabel, type VideoCategory } from '@/lib/videoName';
 
 export interface CarouselVideo {
@@ -23,6 +23,14 @@ export default function PortfolioCarousel({ videos }: { videos: CarouselVideo[] 
   const [range, setRange] = useState<[number, number]>([1, 1]);
   const trackRef = useRef<HTMLUListElement>(null);
   const pendingShow = useRef<number | null>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const [playing, setPlaying] = useState<CarouselVideo | null>(null);
+
+  // O player do Drive só existe enquanto a janela está aberta: nada carrega antes do clique, e fechar para o vídeo.
+  const openPlayer = (video: CarouselVideo) => {
+    setPlaying(video);
+    dialogRef.current?.showModal();
+  };
 
   const tabs = useMemo(() => {
     const present = CATEGORY_ORDER.filter((c) => videos.some((v) => v.category === c));
@@ -140,26 +148,30 @@ export default function PortfolioCarousel({ videos }: { videos: CarouselVideo[] 
             key={video.n}
             id={`video-${video.n}`}
             className="shrink-0 snap-start scroll-mt-24"
-            style={{ width: `max(20rem, calc(var(--media-h) * ${video.aspectRatio.toFixed(4)}))` }}
+            style={{ width: `max(12.5rem, calc(var(--media-h) * ${video.aspectRatio.toFixed(4)}))` }}
           >
-            {/* O player do Drive monta a página dele com pelo menos ~320 px de largura. Num iframe mais estreito ele passa do quadro e o play, que fica no centro dessa página, aparece deslocado e fora do clique. Por isso a caixa nunca é mais estreita que 20rem; o vídeo vertical fica com faixas pretas dos dois lados. */}
-            <div
-              className="relative overflow-hidden bg-black"
-              style={{ height: 'var(--media-h)', width: `max(20rem, calc(var(--media-h) * ${video.aspectRatio.toFixed(4)}))`, maxWidth: '100%' }}
+            {/* Capa e botão de play nossos. O player do Drive abre numa janela grande: dentro do carrossel ele
+                desenhava o play fora do lugar e às vezes não respondia ao clique. */}
+            <button
+              type="button"
+              onClick={() => openPlayer(video)}
+              aria-label={`Reproduzir ${video.title}`}
+              className="group relative block overflow-hidden bg-black"
+              style={{ height: 'var(--media-h)', width: `calc(var(--media-h) * ${video.aspectRatio.toFixed(4)})`, maxWidth: '100%' }}
             >
-              {video.poster && <img src={video.poster} alt="" loading="lazy" className="absolute inset-0 size-full object-cover" />}
-              {/* O Drive só toca vídeo no player dele. A capa fica por baixo enquanto o player carrega; ele só carrega perto da tela. */}
-              <iframe
-                src={video.embedUrl}
-                title={video.title}
-                loading="lazy"
-                allow="autoplay; fullscreen"
-                className="absolute inset-0 size-full border-0"
-              />
+              {video.poster && (
+                <img src={video.poster} alt="" loading="lazy" className="absolute inset-0 size-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" />
+              )}
               <span className="mono pointer-events-none absolute top-3 left-4 text-[1.0625rem] tracking-[0.08em] text-cream [text-shadow:0_1px_6px_rgb(0_0_0/0.7)]">
                 {pad(video.n)}
               </span>
-            </div>
+              <span
+                aria-hidden="true"
+                className="absolute right-4 bottom-4 flex size-11 items-center justify-center rounded-full border-[1.5px] border-cream bg-black/35 text-cream transition-colors group-hover:bg-black/60"
+              >
+                <Play size={18} fill="currentColor" className="ml-0.5" />
+              </span>
+            </button>
             <h3 title={video.title} className="mt-4 line-clamp-3 text-[1.5rem] leading-tight font-bold text-cream md:text-[1.75rem]">{video.title}</h3>
             {video.category && (
               <p className="mt-1 text-[1.0625rem] text-dim">
@@ -170,6 +182,46 @@ export default function PortfolioCarousel({ videos }: { videos: CarouselVideo[] 
           </li>
         ))}
       </ul>
+
+      <dialog
+        ref={dialogRef}
+        aria-label={playing ? playing.title : 'Vídeo'}
+        onClose={() => setPlaying(null)}
+        onClick={(e) => e.target === e.currentTarget && dialogRef.current?.close()}
+        className="m-auto max-h-[94svh] max-w-[96vw] border border-rule bg-background p-3 text-body backdrop:bg-black/85 md:p-4"
+      >
+        {playing && (
+          <div style={{ width: `min(calc(96vw - 2rem), max(26rem, calc(min(80svh, 46rem) * ${playing.aspectRatio.toFixed(4)})))` }}>
+            <div className="flex items-center justify-between gap-4 pb-3">
+              <p className="line-clamp-1 min-w-0 flex-1 text-[0.9375rem] font-medium text-cream">{playing.title}</p>
+              <button type="button" onClick={() => dialogRef.current?.close()} className="btn !min-h-9 shrink-0 text-[0.9375rem]">
+                Fechar
+              </button>
+            </div>
+            {/* Largura mínima de ~26rem: o player do Drive monta a página dele com pelo menos ~320 px e, mais estreito, desloca o play. */}
+            <div
+              className="relative w-full bg-black"
+              style={{
+                height: `min(80svh, 46rem, calc((96vw - 2rem) / ${playing.aspectRatio.toFixed(4)}))`,
+              }}
+            >
+              <iframe
+                src={playing.embedUrl}
+                title={playing.title}
+                allow="autoplay; fullscreen"
+                allowFullScreen
+                className="absolute inset-0 size-full border-0"
+              />
+            </div>
+            <p className="pt-3 text-sm text-dim">
+              Não carregou?{' '}
+              <a href={playing.embedUrl.replace(/\/preview$/, '/view')} target="_blank" rel="noopener" className="text-cream underline underline-offset-4">
+                Abrir no Google Drive
+              </a>
+            </p>
+          </div>
+        )}
+      </dialog>
 
       <div className="mt-8 flex items-center justify-end gap-4">
         <button type="button" onClick={() => step(-1)} aria-label="Vídeos anteriores" className="btn !size-10 !min-h-0 !p-0">

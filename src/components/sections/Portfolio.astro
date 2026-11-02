@@ -21,5 +21,5 @@ const { videos } = Astro.props;
       Ver todos os trabalhos <ArrowIcon />
     </a>
   </div>
-  <PortfolioCarousel client:visible videos={videos} />
+  <PortfolioCarousel client:load videos={videos} />
 </section>
