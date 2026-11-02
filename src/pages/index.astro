@@ -10,6 +10,7 @@ import Timeline from '@/components/timeline/Timeline.tsx';
 import { getImage } from 'astro:assets';
 import { loadPortfolio } from '@/lib/drive';
 import { site } from '@/data/site';
+import { parseVideoName } from '@/lib/videoName';
 
 // Se a busca falhar ou vier vazia, o build quebra de propósito: nunca publicar o portfólio vazio.
 const videos = await loadPortfolio({
@@ -30,6 +31,15 @@ const posters = await Promise.all(
   }),
 );
 
+// Nome do arquivo no padrão `Título - Categoria - Detalhe`; fora do padrão, o nome inteiro vira o título.
+const carouselVideos = videos.map((video, i) => ({
+  n: i + 1,
+  ...parseVideoName(video.title),
+  embedUrl: video.embedUrl,
+  poster: posters[i],
+  aspectRatio: video.aspectRatio,
+}));
+
 // Cores dos clipes: ver Global Constraints do plano. Ids sem elemento na página são ignorados.
 const clips = [
   { id: 'abertura', label: 'Abertura', track: 'V1', color: '#a98bd6' },
@@ -43,7 +53,7 @@ const clips = [
 <BaseLayout title={`${site.name} — ${site.role}`} description={site.heroText[0]}>
   <main>
     <Hero />
-    <Portfolio videos={videos} posters={posters} />
+    <Portfolio videos={carouselVideos} />
     <Process />
     <Hire />
     <Clients />
