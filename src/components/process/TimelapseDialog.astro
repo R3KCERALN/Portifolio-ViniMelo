@@ -1,0 +1,49 @@
+---
+import { site } from '@/data/site';
+---
+
+<div data-timelapse>
+  <button type="button" data-open class="group mt-4 inline-flex min-h-11 items-center gap-3 text-[1.0625rem] text-body hover:text-cream">
+    <span class="flex size-10 items-center justify-center rounded-full border-[1.5px] border-cream text-cream" aria-hidden="true">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l11-6.5a1 1 0 0 0 0-1.72l-11-6.5A1 1 0 0 0 8 5.5z"></path></svg>
+    </span>
+    {site.timelapseLabel}
+  </button>
+
+  <dialog aria-label={site.timelapseLabel} class="m-auto max-h-[92svh] max-w-[min(92vw,26rem)] border border-rule bg-background p-4 text-body backdrop:bg-black/80">
+    <div class="flex justify-end pb-3">
+      <button type="button" data-close class="btn !min-h-9 text-[0.9375rem]">Fechar</button>
+    </div>
+    <video
+      width="478"
+      height="850"
+      controls
+      playsinline
+      preload="none"
+      src="/media/processo-timelapse.mp4"
+      aria-label="Timelapse do Vinicius editando um vídeo"
+      class="mx-auto block h-auto max-h-[75svh] w-auto max-w-full bg-black"
+    ></video>
+  </dialog>
+</div>
+
+<script>
+  // Abre o timelapse num <dialog> nativo: Esc fecha, o foco volta ao botão e o vídeo só carrega depois do clique.
+  document.querySelectorAll<HTMLElement>('[data-timelapse]').forEach((root) => {
+    const opener = root.querySelector<HTMLButtonElement>('[data-open]')!;
+    const dialog = root.querySelector<HTMLDialogElement>('dialog')!;
+    const video = root.querySelector<HTMLVideoElement>('video')!;
+    opener.addEventListener('click', () => {
+      dialog.showModal();
+      video.play().catch(() => {});
+    });
+    root.querySelector('[data-close]')!.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('close', () => {
+      video.pause();
+      opener.focus();
+    });
+  });
+</script>
