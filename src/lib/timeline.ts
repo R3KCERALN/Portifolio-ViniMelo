@@ -37,3 +37,25 @@ export function computeClips(sections: { id: string; top: number; height: number
     width: (height / docHeight) * 100,
   }));
 }
+
+/** Inverso de `scrollProgress`: a rolagem (px) em que a agulha fica em `progress`. */
+export function progressToScrollY(progress: number, viewportHeight: number, docHeight: number): number {
+  const maxScroll = Math.max(0, docHeight - viewportHeight);
+  if (maxScroll === 0) return 0;
+  const p = Math.min(1, Math.max(0, progress));
+  const y = (p * docHeight - 0.5 * viewportHeight) / (1 + (0.5 * viewportHeight) / maxScroll);
+  return Math.min(maxScroll, Math.max(0, y));
+}
+
+/** Divide o clipe pai em `count` caixas iguais, com folga entre elas, de ids `video-1…N`. */
+export function subdivideClip(parent: ClipBox, count: number, gapPercent = 0.15): ClipBox[] {
+  if (count <= 0) return [];
+  // As folgas nunca passam de 20% do clipe pai, para as caixas não sumirem em telas estreitas.
+  const gap = Math.min(gapPercent, (parent.width * 0.2) / Math.max(1, count - 1));
+  const width = (parent.width - gap * (count - 1)) / count;
+  return Array.from({ length: count }, (_, i) => ({
+    id: `video-${i + 1}`,
+    left: parent.left + i * (width + gap),
+    width,
+  }));
+}
