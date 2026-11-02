@@ -77,6 +77,6 @@ Nunca faça `git push` nem crie contas ou chaves por conta própria.
 6. Se não houver tarefa aguardando, diga isso e pare.
 7. Depois da Task 12, peça para trocar para Opus 5.5, esforço alto, e faça a revisão final da branch inteira em `reviews/final.md`.
 
-**Redesign (Tasks 11 e 12):** nas revisões pendentes das Tasks 4, 6, 7, 8, 9 e 11, confira lógica, testes, acessibilidade e textos, mas não registre achados de aparência (cor, fonte, layout), porque a Task 11 refaz o visual. A conferência visual com `ui-ux-pro-max` em 1440/375 px fica para a revisão da Task 12, que substitui o visual da 11.
+**Redesign (Tasks 11 e 12):** nas revisões pendentes das Tasks 4, 6, 7, 8, 9 e 11, confira lógica, testes, acessibilidade e textos, mas não registre achados de aparência (cor, fonte, layout), porque a Task 12 refaz o visual. A conferência visual com `ui-ux-pro-max` em 1440/375 px fica para a revisão da Task 12, que substitui o visual da 11.
 
 A revisora não edita código. Se um achado for de escopo (spec ambígua), ela registra como `pergunta para o usuário`.
