@@ -607,7 +607,7 @@ Texto escuro sobre clipes e botões preenchidos: `--bg`. Raios: clipes 3 px, bot
 
 Os eyebrows ficam escritos em caixa normal no `site.ts`. A caixa alta vem do CSS (`text-transform: uppercase`), para o leitor de tela não soletrar.
 
-- [ ] **Step 1: Tokens, fontes e menu.**
+- [x] **Step 1: Tokens, fontes e menu.**
   - Instale `@fontsource/ibm-plex-mono` e reescreva os tokens.
   - Crie o `SiteHeader.astro`, fixo no topo, com fundo `--bg` e o fio `--rule-strong` embaixo:
     - à esquerda, "VM." (Archivo 900, link para `#abertura`);
@@ -616,7 +616,7 @@ Os eyebrows ficam escritos em caixa normal no `site.ts`. A caixa alta vem do CSS
   - Abaixo de 768 px ficam só o "VM." e o botão.
   - Remova o `WhatsAppButton` e o `--pill-gutter`.
   - As seções ganham `scroll-margin-top` igual à altura do menu.
-- [ ] **Step 2: Abertura** (referência 01).
+- [x] **Step 2: Abertura** (referência 01).
   - **Coluna esquerda:**
     - eyebrow lilás;
     - `h1` "Vinicius" / "Melo." em duas linhas;
@@ -627,7 +627,7 @@ Os eyebrows ficam escritos em caixa normal no `site.ts`. A caixa alta vem do CSS
   - **Embaixo:** um fio `--rule-strong` e a faixa "NOKIA", "SEA TELECOM" e "SKYFIT" em mono `--muted`, com espaço entre os nomes, sem "·".
   - **Abaixo da faixa** (decisão 1): os dois parágrafos aprovados (`site.heroText`) em duas colunas no desktop (uma no celular), `--muted`, 17–18 px, máx. 60ch cada.
   - A animação de entrada da Task 11 (wipe do título e corte seco da foto) continua.
-- [ ] **Step 3: Nome do vídeo** (TDD). Em `src/lib/videoName.ts`:
+- [x] **Step 3: Nome do vídeo** (TDD). Em `src/lib/videoName.ts`:
   - `parseVideoName(fileTitle: string): { title: string; category: VideoCategory | null; detail: string | null }`;
   - `type VideoCategory = 'criativo' | 'institucional' | 'motion-ia'`.
   - **Padrão:** `Título - Categoria - Detalhe`, separado por " - " (espaço, hífen, espaço; o detalhe é opcional).
@@ -640,7 +640,7 @@ Os eyebrows ficam escritos em caixa normal no `site.ts`. A caixa alta vem do CSS
     - `'VÍDEO TREND'` → título igual à entrada.
   - **Também:** `categoryLabel(c)` → "Criativo"/"Institucional"/"Motion & IA" (metadado do card) e `categoryTabLabel(c)` → "Criativos"/"Institucionais"/"Motion & IA" (aba).
   - O título do arquivo continua vindo de `titleFromFileName`, sem mudança.
-- [ ] **Step 4: Portfólio** (referência 02, `PortfolioCarousel.tsx` com `client:visible`). Recebe os vídeos já com `parseVideoName` aplicado e os pôsteres.
+- [x] **Step 4: Portfólio** (referência 02, `PortfolioCarousel.tsx` com `client:visible`). Recebe os vídeos já com `parseVideoName` aplicado e os pôsteres.
   - **Topo:**
     - à esquerda, eyebrow azul, `h2` "Portfólio." e `portfolioTagline`;
     - à direita, alinhado à base do título, o botão contornado "Ver todos os trabalhos ↗" (pasta do Drive).
@@ -653,7 +653,7 @@ Os eyebrows ficam escritos em caixa normal no `site.ts`. A caixa alta vem do CSS
     - **Diferença aceita em relação à referência:** o botão de play do canto inferior direito não é desenhado. O próprio Drive mostra o play dele no centro, e um segundo botão por cima do iframe bloquearia o clique ou exigiria dois cliques.
   - **Navegação:** setas "←" e "→" (botões contornados com `aria-label` "Vídeos anteriores"/"Próximos vídeos") e o contador "01 — 03 / 10" em mono, com o primeiro e o último card visíveis e o total do filtro. As setas avançam um card. Setas do teclado funcionam com o foco na faixa.
   - Os ids `video-N` ficam em cada card.
-- [ ] **Step 5: Processo** (referência 03, topo).
+- [x] **Step 5: Processo** (referência 03, topo).
   - **Coluna esquerda:**
     - eyebrow verde, `h2` "Processo" / "criativo." e `processTagline`;
     - a mini timeline: régua 00:00 · 00:15 · 00:30 · 00:45 · 01:00 com "00:00:00:00" azul em mono; trilhas V5 a V1 de cima para baixo, separadas por fios `--rule`; clipes em escada, "01 Corte do material bruto" em V1 até "05 Efeitos e pós-produção" em V5, com as cores da tabela, texto `--bg` em 600 e o número em 700; a agulha `#68a3e7` vertical com a cabeça no alto.
@@ -662,7 +662,7 @@ Os eyebrows ficam escritos em caixa normal no `site.ts`. A caixa alta vem do CSS
     - a foto `processo-timeline.jpg` numa moldura com cantoneiras, recortada em 4:3 (`object-fit: cover; object-position: 50% 47%`, mostra o notebook com a timeline);
     - abaixo, o botão-link (play num círculo contornado + `timelapseLabel`), que abre o `TimelapseDialog`: um `<dialog>` nativo com o timelapse vertical (`/media/processo-timelapse.mp4`, `controls`, `playsinline`, começa a tocar ao abrir, para ao fechar), botão "Fechar", Esc fecha e o foco volta ao botão.
   - **Embaixo das duas colunas** (decisão 1): `site.processIntro` (só o primeiro parágrafo; o "Cada bloco passa pelas mesmas etapas:" sai porque as etapas já estão acima) e `site.processReferences`, em `--muted`, máx. 65ch.
-- [ ] **Step 6: Contrate** (referência 03, embaixo).
+- [x] **Step 6: Contrate** (referência 03, embaixo).
   - **Topo:** eyebrow rosa, `h2` "Contrate o Vinicius." em uma linha no desktop e `hireTagline`. Logo abaixo vem `site.hireIntro`, menor, em `--muted` (decisão 1).
   - **"Vídeos avulsos":** tabela em linhas entre fios `--rule`. Colunas: nome (Archivo 700, ~22 px), "|" fino, `shortDescription` (com a `description` aprovada numa segunda linha menor `--muted` abaixo, decisão 1), "|", preço (700, `tabular-nums`, "Sob consulta" quando não tem) e um botão quadrado contornado "→" para o WhatsApp da linha (`aria-label` "Conversar sobre o Básico" etc.). A `priceNote` do Complexo sai embaixo do preço, pequena. Abaixo da tabela vai o parágrafo aprovado "O preço depende da duração…", em `--muted`. No celular cada linha empilha: nome + preço, descrições, botão.
   - **"Pacotes":** duas caixas lado a lado (empilhadas no celular), com contorno de 1.5 px e raio de 6 px:
@@ -670,7 +670,7 @@ Os eyebrows ficam escritos em caixa normal no `site.ts`. A caixa alta vem do CSS
     - VIP: contorno `--pink`, eyebrow "Mais vantajoso" rosa em mono, botão preenchido `#fda8cf` com texto `--bg` "Conversar ↗".
     - Conteúdo de cada caixa: nome (700), conteúdo do pacote, preço grande (Archivo 900), "R$ 32 por vídeo · 20% de desconto", "Válido por 15 dias". O preço cheio riscado sai, como na referência.
   - **Fim da seção:** a linha "**Precisa de outro volume ou formato?** Vamos montar seu contrato." como link para o WhatsApp do contrato personalizado. Abaixo, `site.customContractText` pequeno e `invoiceNote` pequeno.
-- [ ] **Step 7: Timeline** (as três referências, embaixo). Desktop, de cima para baixo:
+- [x] **Step 7: Timeline** (as três referências, embaixo). Desktop, de cima para baixo:
   - **Linha de controle** (~44 px, fio `--rule` entre as linhas): botão play/pause no centro (triângulo `--cream`; `aria-label` "Reproduzir a página"/"Pausar", `aria-pressed`) e "ARRASTE PARA EXPLORAR" à direita, em mono `--muted`.
   - **Régua** (~32 px): timecode azul mono na coluna de rótulos (130 px) e as marcas 00:00 até 01:00.
   - **V2, V1 e A1** (~44 px cada): rótulos "V2/V1/A1" em `--muted`; clipes com texto `--bg` em 700.
@@ -684,10 +684,10 @@ Os eyebrows ficam escritos em caixa normal no `site.ts`. A caixa alta vem do CSS
   - **Play:** rola a página em tempo real, para o timecode andar 1 s por segundo. A página inteira dura `TIMELINE_TOTAL_SECONDS` (60 s). Use `requestAnimationFrame` com `progressToScrollY`. Pausa no clique, em `wheel`, `touchstart`, `keydown` e no fim da página. Com reduced motion, em vez de rolar suave, pula de seção V1 em seção V1 a cada 4 s, com `behavior: 'auto'`.
   - **Arrastar:** `pointerdown` na régua ou numa trilha, fora de um clipe, e depois `pointermove` com `setPointerCapture`. A posição horizontal vira progresso, e o progresso vira `window.scrollTo(0, progressToScrollY(...))`, sem suavizar. A agulha tem `role="slider"`, `tabIndex=0`, `aria-valuemin=0`, `aria-valuemax=60`, `aria-valuenow` em segundos e `aria-valuetext` com o timecode. Setas valem ±1 s, PageUp e PageDown ±5 s, Home e End vão ao início e ao fim.
   - **Timecode ao vivo:** a cada quadro, a timeline escreve o timecode em todo `[data-timecode]` da página.
-- [ ] **Step 8: Trabalhou com e rodapé** (fora das referências, com o mesmo sistema).
+- [x] **Step 8: Trabalhou com e rodapé** (fora das referências, com o mesmo sistema).
   - **Trabalhou com:** eyebrow amarelo `clientsEyebrow`, `h2` "Trabalhou com." e as 14 logos numa grade com fios `--rule` (sem fundo nas células), tratamentos atuais (círculo da Fazz e brilho da Yêda e do Pró-Cardíaco), conferidos no `#121211`.
   - **Rodapé:** fio `--rule-strong`, "VM." à esquerda e o crédito à direita, em `--muted`.
-- [ ] **Step 9: Verificação.**
+- [x] **Step 9: Verificação.**
   - **Lado a lado com as referências:** capturas a 1586 px (01 e 02) e 1086 px (03), salvas em `docs/superpowers/screenshots/task-12/`. Diferenças aceitáveis: a foto real no lugar das imagens inventadas da referência, as capas reais dos vídeos e o play do Drive no lugar do botão desenhado.
   - **Telas de 1440, 1024 e 375 px:**
     - sem rolagem horizontal;
@@ -700,4 +700,4 @@ Os eyebrows ficam escritos em caixa normal no `site.ts`. A caixa alta vem do CSS
     - o clique no V2 "07" mostra o card 07;
     - as abas filtram (teste com nomes no padrão forçados só no teste).
   - **Comandos:** `npm test` passando e `npm run build` falhando só pela falta da chave.
-- [ ] **Step 10: Commits** por passo (`feat: ...`, `test: ...`). Depois, a linha em `progress.md` e a lista de nomes sugeridos para o Vinicius renomear no Drive (formato `Título - Categoria - Detalhe`).
+- [x] **Step 10: Commits** por passo (`feat: ...`, `test: ...`). Depois, a linha em `progress.md` e a lista de nomes sugeridos para o Vinicius renomear no Drive (formato `Título - Categoria - Detalhe`).

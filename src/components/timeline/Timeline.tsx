@@ -253,7 +253,7 @@ export default function Timeline({ videoCount }: { videoCount: number }) {
                     aria-label={`Ir para o vídeo ${pad(i + 1)}`}
                     aria-current={isActive(box) ? 'location' : undefined}
                     onClick={() => goToVideo(i + 1)}
-                    className={`${clipClass} !px-1 text-center !text-[11px] md:!text-xs`}
+                    className={`${clipClass} !px-1 text-center !text-[10px] xl:!text-xs`}
                     style={{ left: `${box.left}%`, width: `${box.width}%`, background: 'var(--blue)', minWidth: 3 }}
                   >
                     <span className="hidden md:inline" aria-hidden="true">{pad(i + 1)}</span>
