@@ -25,3 +25,5 @@ pnpm-debug.log*
 
 # brainstorm mockups
 .superpowers/
+.vercel
+.env.local
